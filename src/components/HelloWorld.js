@@ -19,7 +19,10 @@ export default {
       },
       pageALoaded: false,
 
-      pageBLoaded: false,
+      pageBLoaded: true,
+      pageBTimer: null,
+
+      pageCLoaded: false,
     }
   },
   created() {
@@ -33,6 +36,7 @@ export default {
   },
   beforeDestroy() {
     typeA = null;
+    this.pageBTimer = null;
   },
   methods: {
     init() {
@@ -61,7 +65,11 @@ export default {
       this.$refs.pageB.style.zIndex = 998;
     },
     clickNailCheck() {
-      console.log('clickB')
+      console.log('clickB');
+      this.pageBTimer = setTimeout(() => {
+        this.pageBLoaded = true;
+        this.pageBfun();
+      }, 1500);
     },
     pageCInit() {
       this.$refs.pageC.style.opacity = 1;

@@ -40,8 +40,7 @@
 
 
 .page-b {
-  z-index: 9989;
-  background-color: #f60;
+  z-index: 998;
 }
 .nail-box {
   position: absolute;
@@ -53,7 +52,75 @@
   background-image: url('../assets/bluedash/1/1-指纹.png');
   background-size: 1.9rem 2.9rem;
 }
+
+
 .page-c {
   z-index: 997;
-  background-color: #409f43;
+}
+.page-c-dog {
+  position: absolute;
+  left: 50%;
+  bottom: 20%;
+  transform: translate(-50%, 0);
+  width: 1.4rem;
+}
+.effect-out{
+  -webkit-animation: effectOut 1.5s ease-in-out forwards;
+  -moz-animation: effectOut 1.5s ease-in-out forwards;
+  animation-fill-mode: forwards;
+}
+@-webkit-keyframes effectOut{
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@-moz-keyframes effectOut{
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+.page-c-text1 {
+  position: absolute;
+  right: .36rem;
+  bottom: 3rem;
+  width: .8rem;
+}
+.page-c-text2 {
+  position: absolute;
+  right: .34rem;
+  bottom: 3.35rem;
+  width: 1.1rem;
+  opacity: 0;
+}
+.effect-in{
+  -webkit-animation: effectOut 1.5s 1.5s ease-in-out forwards;
+  -moz-animation: effectOut 1.5s 1.5s ease-in-out forwards;
+}
+@-webkit-keyframes effectOut{
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes effectOut{
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+.page-c-hole {
+  position: absolute;
+  left: 50%;
+  bottom: .6rem;
+  transform: translate(-50%);
+  width: 3rem;
+  z-index: -1;
+}
+
+
+.page-d {
+  background-image: url('../assets/bluedash/2/2-背景.jpg');
+  background-size: 100% 100%;
+  z-index: 99996;
+}
+.page-d-dog {
+  position: absolute;
+  top: .8rem;
+  left: 50%;
+  transform: translate(-36%);
+  width: .9rem;
 }
