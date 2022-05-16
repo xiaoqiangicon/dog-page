@@ -1,6 +1,8 @@
 import EasyTyper from 'easy-typer-js';
+import { equip } from '../data';
 
 let typeA = null;
+let typeD = null;
 export default {
   name: 'HelloWorld',
   data() {
@@ -23,6 +25,37 @@ export default {
       pageBTimer: null,
 
       pageCLoaded: false,
+
+      hidePageDGuide: false,
+      pageDLoaded: false,
+      pageDTyper: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageDTyperClose: false,
+      equip,
+      setEquip: [],
+
+      hidePageEGuide: true,
+      pageELoaded: false,
+      pageETyper: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageETyperClose: false,
+      step: 1,
     }
   },
   created() {
@@ -30,12 +63,11 @@ export default {
   },
   mounted() {
     this.pageAInit();
-    // this.pageAfun().then(() => {
-    //   this.pageBfun()
-    // });
+    this.pageFRun();
   },
   beforeDestroy() {
     typeA = null;
+    typeD = null;
     this.pageBTimer = null;
   },
   methods: {
@@ -65,17 +97,119 @@ export default {
       this.$refs.pageB.style.zIndex = 998;
     },
     clickNailCheck() {
-      console.log('clickB');
       this.pageBTimer = setTimeout(() => {
         this.pageBLoaded = true;
-        this.pageBfun();
+        this.pageBfun().then(() => {
+          this.transition(this.$refs.pageCText1, {
+            time: 1000,
+            style: {
+              opacity: 0,
+            }
+          }).then(() => {
+            this.transition(this.$refs.pageCText2, {
+              time: 1000,
+              style: {
+                opacity: 1,
+              }
+            })
+          })
+        });
       }, 1500);
     },
     pageCInit() {
       this.$refs.pageC.style.opacity = 1;
       this.$refs.pageC.style.zIndex = 997;
     },
-    
+    async clickDog() {
+      await this.transition(this.$refs.hole, {
+        time: 500,
+        style: {
+          opacity: 1,
+        }
+      })
+      this.pageCfun();
+    },
+
+    pageDInit() {
+      this.pageDTyperClose = false;
+    },
+    initPageDType() {
+      this.pageDoutput = `欢迎编号${this.id}正式加⼊100%BEATS计划，请从以下列表中选择两件贴⾝物品，准备登舰。`
+      typeD = new EasyTyper(this.pageDTyper, this.pageDoutput, this.pageDOnloaded)
+    },
+    pageDOnloaded() {
+      this.hidePageDGuide = false;
+      this.pageDTyperClose = true;
+    },
+    clickPageDGuide() {
+      if (this.pageDTyperClose) {
+        this.hidePageDGuide = true;
+      }
+    },
+    addEquip(equip) {
+      if (this.setEquip[0] && this.setEquip[0].id === equip.id) {
+        this.setEquip[0].selected = false;
+        this.setEquip.shift();
+        return;
+      }
+      if (this.setEquip[1] && this.setEquip[1].id === equip.id) {
+        this.setEquip[1].selected = false;
+        this.setEquip.pop();
+        return;
+      }
+      if (this.setEquip.length >= 2) {
+        this.setEquip[0].selected = false;
+        this.setEquip=[this.setEquip[1]];
+      }
+      equip.selected = true;
+      this.setEquip.push(equip);
+      equip.selected = true;
+    },
+    clickPageDBtn() {
+      this.pageDfun();
+    },
+
+    initPageDType() {
+      this.pageEoutput = `100%BEATS号准备发射，现在为您准备了⽓氛助燃剂，务必点击饮下，时刻确保进⼊你的最佳状态！`;
+      typeD = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
+    },
+    pageEOnloaded() {
+      this.hidePageEGuide = false;
+      this.pageETyperClose = true;
+    },
+    async clickPageECircle() {
+      if (this.step < 4) {
+        this.step++;
+      } else {
+        this.step = 1;
+      }
+      await this.transition(this.$refs.pageECircle, {
+        time: 100,
+        style: {
+          scale: '.95',
+        }
+      })
+      await this.transition(this.$refs.pageECircle, {
+        time: 100,
+        style: {
+          scale: '1',
+        }
+      })
+    },
+    async pageFRun() {
+      await this.transition(this.$refs.hot, {
+        time: 1000,
+        style: {
+          scale: '1.2',
+        }
+      })
+      await this.transition(this.$refs.fire, {
+        time: 200,
+        style: {
+          opacity: 1,
+        }
+      })
+    },
     async pageAfun() {
       await this.transition(this.$refs.pageA, {
         time: 1000,
@@ -94,9 +228,23 @@ export default {
         }
       })
     },
-    clickA() {
-      typeA.close();
-      this.typeAclose = !0;
+    async pageCfun() {
+      await this.transition(this.$refs.pageC, {
+        time: 1000,
+        style: {
+          opacity: 0,
+          zIndex: -1
+        }
+      })
+    },
+    async pageDfun() {
+      await this.transition(this.$refs.pageD, {
+        time: 1000,
+        style: {
+          opacity: 0,
+          zIndex: -1
+        }
+      })
     },
     transition (el, options) {
       return new Promise((resolve, reject) => {

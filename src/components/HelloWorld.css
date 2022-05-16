@@ -109,13 +109,14 @@
   transform: translate(-50%);
   width: 3rem;
   z-index: -1;
+  opacity: 0;
 }
 
 
 .page-d {
   background-image: url('../assets/bluedash/2/2-背景.jpg');
   background-size: 100% 100%;
-  z-index: 99996;
+  z-index: 996;
 }
 .page-d-dog {
   position: absolute;
@@ -123,4 +124,164 @@
   left: 50%;
   transform: translate(-36%);
   width: .9rem;
+}
+
+
+.page-d-guide,
+.page-e-guide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+.page-d-guide-content {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  width: 100%;
+  height: 1.5rem;
+  background-image: url('../assets/bluedash/2/2-对话框.png');
+  background-size: 100% 100%;
+}
+.page-d-guide-avatar {
+  position: absolute;
+  width: .4rem;
+  left: .5rem;
+  top: .2rem;
+}
+.page-d-guide-tips {
+  position: absolute;
+  left: 1rem;
+  top: .2rem;
+  width: 2.3rem;
+  height: 1rem;
+  color: #fff;
+  font-size: 16px;
+  text-align: left;
+}
+.equip-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: absolute;
+  left: .35rem;
+  bottom: 2.2rem;
+  width: 3.1rem;
+  height: 1.4rem;
+}
+.equip-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: .67rem;
+  height: .6rem;
+  margin-bottom: .14rem;
+  background: url('../assets/bluedash/2/2-道具框.png');
+  background-size: 100% 100%;
+}
+.equip-item:nth-of-type(3n) {
+  margin-right: 0;
+}
+.equip {
+  width: 80%;
+}
+.equip-item-gray {
+  background: #ccc;
+}
+.page-d-btn {
+  position: absolute;
+  bottom: .55rem;
+  left: 50%;
+  transform: translate(-50%);
+  width: 1.75rem;
+  height: .62rem;
+  background: url('../assets/bluedash/2/2-按钮未启动.png');
+  background-size: 100% 100%;
+}
+.page-d-btn-active {
+  background: url('../assets/bluedash/2/22-按钮亮起.png');
+  background-size: 100% 100%;
+}
+
+
+.page-e {
+  z-index: 995;
+  background: url('../assets/bluedash/3/3-背景.jpg');
+  background-size: 100% 100%;
+}
+.page-e-dog {
+  position: absolute;
+  left: 50%;
+  top: 1.3rem;
+  transform: translateX(-50%);
+  width: 1.21rem;
+  height: 2.07rem;
+  background-size: 100% 100%;
+}
+.page-e-dog-1 {
+  background-image: url('../assets/bluedash/3/3-有点意思的-2.png');
+}
+.page-e-dog-2 {
+  background-image: url('../assets/bluedash/3/3-感觉来了的-1.png');
+}
+.page-e-dog-3 {
+  background-image: url('../assets/bluedash/3/3-燃起来了的-3.png');
+}
+.page-e-dog-4 {
+  background-image: url('../assets/bluedash/3/3-然进云霄了的-4.png');
+}
+.page-e-circle {
+  position: absolute;
+  left: 1.125rem;
+  bottom: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('../assets/bluedash/3/3-按住获取能量按钮.png');
+  background-size: 100% 100%;
+}
+.page-e-btn {
+  position: absolute;
+  left: 50%;
+  bottom: .3rem;
+  transform: translate(-50%);
+  width: 2rem;
+  height: .87rem;
+  background-image: url('../assets/bluedash/3/3-下一步按钮出现.png');
+  background-size: 100% 100%;
+}
+
+
+.page-f {
+  z-index: 9995;
+  background: url('../assets/bluedash/5/5-背景.jpg');
+  background-size: 100% 100%;
+}
+.page-f-bg {
+  position: absolute;
+  left: 0;
+  top: .5rem;
+  width: 100%;
+  height: 100%;
+}
+.page-f-rocket {
+  position: absolute;
+  left: .875rem;
+  bottom: .3rem;
+  width: 2rem;
+}
+.page-f-hot {
+  position: absolute;
+  width: 1rem;
+  bottom: .4rem;
+  left: 1.375rem;
+}
+.page-f-fire {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: -1;
 }
