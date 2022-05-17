@@ -78,9 +78,6 @@ export default {
   methods: {
     init() {
       this.pageAInit();
-      this.pageBInit();
-      this.pageCInit();
-      this.pageDInit();
     },
     pageAInit() {
       this.pageALoaded = false;
@@ -89,6 +86,8 @@ export default {
       this.initPageAType();
     },
     initPageAType() {
+      typeA = null;
+      this.pageAoutput = `Hi!?你已成功被选为本次100%BEATS号移⺠计划的⼀员，你的ID是：${this.id}`;
       typeA = new EasyTyper(this.pageATyper, this.pageAoutput, this.pageAOnloaded)
     },
     pageAOnloaded() {
@@ -170,9 +169,9 @@ export default {
       this.equip.forEach(equip => {
         equip.selected = false;
       })
-      this.$refs.pageD.opacity = 1;
-      this.$refs.pageD.style.zIndex = 9996;
-      this.initPageDType();
+      this.$refs.pageD.style.opacity = 1;
+      this.$refs.pageD.style.zIndex = 996;
+      
     },
     initPageDType() {
       this.pageDoutput = `欢迎编号${this.id}正式加⼊100%BEATS计划，请从以下列表中选择两件贴⾝物品，准备登舰。`
@@ -181,6 +180,12 @@ export default {
     pageDOnloaded() {
       this.hidePageDGuide = false;
       this.pageDTyperClose = true;
+      this.transition(this.$refs.pageDGuideContinue, {
+        time: 400,
+        style: {
+          opacity: 1,
+        }
+      })
     },
     async clickPageDGuide() {
       if (!this.pageDTyperClose) return; 
@@ -220,18 +225,21 @@ export default {
     },
 
     pageEInit() {
+      this.$refs.pageE.style.opacity = 1;
+      this.$refs.pageE.style.zIndex = 995;
       this.hidePageEGuide = false;
       this.pageETyperClose = false;
-      this.initPageEType();
+      this.step = 1;
     },
     initPageEType() {
+      typeE = null;
       this.pageEoutput = `100%BEATS号准备发射，现在为您准备了⽓氛助燃剂，务必点击饮下，时刻确保进⼊你的最佳状态！`;
       typeE = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
     },
     pageEOnloaded() {
       this.hidePageEGuide = false;
       this.pageETyperClose = true;
-      this.transition(this.$refs.pageDGuideContinue, {
+      this.transition(this.$refs.pageEGuideContinue, {
         time: 400,
         style: {
           opacity: 1,
@@ -270,6 +278,10 @@ export default {
       await this.pageEfun();
       await this.pageFRun();
     },
+    initPageFInit() {
+      this.$refs.pageF.style.opacity = 1;
+      this.$refs.pageF.style.zIndex = 994;
+    },
     async pageFRun() {
       await this.transition(this.$refs.hot, {
         time: 1000,
@@ -295,18 +307,17 @@ export default {
           opacity: 0
         }
       })
-      await this.transition(this.$refs.pageF, {
-        time: 200,
-        style: {
-          opacity: 0,
-          zIndex: -1,
-        }
-      })
+      await this.pageFfun();
     },
     playAgain() {
       this.init();
     },
+    initPageGInit() {
+      this.$refs.pageG.style.opacity = 1;
+      this.$refs.pageG.style.zIndex = 993;
+    },
     async pageAfun() {
+      this.pageBInit();
       await this.transition(this.$refs.pageA, {
         time: 1000,
         style: {
@@ -314,8 +325,10 @@ export default {
           zIndex: 0
         }
       })
+      this.pageATyper.output = '';
     },
     async pageBfun() {
+      this.pageCInit();
       await this.transition(this.$refs.pageB, {
         time: 1000,
         style: {
@@ -325,6 +338,7 @@ export default {
       })
     },
     async pageCfun() {
+      this.pageDInit();
       await this.transition(this.$refs.pageC, {
         time: 1000,
         style: {
@@ -332,8 +346,31 @@ export default {
           zIndex: -1
         }
       })
+      this.transition(this.$refs.hole, {
+        time: 10,
+        style: {
+          opacity: 0,
+          rotateZ: '10deg'
+        }
+      })
+      this.transition(this.$refs.pageCDog, {
+        time: 10,
+        style: {
+          rotateZ: '0deg',
+          scale: '1',
+          opacity: 1,
+        }
+      })
+      this.transition(this.$refs.pageCText2, {
+        time: 10,
+        style: {
+          opacity: 1,
+        }
+      })
+      await this.initPageDType();
     },
     async pageDfun() {
+      this.pageEInit();
       await this.transition(this.$refs.pageD, {
         time: 1000,
         style: {
@@ -341,13 +378,27 @@ export default {
           zIndex: -1
         }
       })
+      await this.initPageEType();
+      this.pageDTyper.output = '';
     },
     async pageEfun() {
+      this.initPageFInit();
       await this.transition(this.$refs.pageE, {
         time: 1000,
         style: {
           opacity: 0,
           zIndex: -1
+        }
+      })
+      this.pageETyper.output = '';
+    },
+    async pageFfun() {
+      this.initPageGInit();
+      await this.transition(this.$refs.pageF, {
+        time: 200,
+        style: {
+          opacity: 0,
+          zIndex: -1,
         }
       })
     },
@@ -365,7 +416,6 @@ export default {
       
       let number = Math.floor(Math.random() * 10000);
       this.id = first + second + number;
-      this.pageAoutput = `Hi!?你已成功被选为本次100%BEATS号移⺠计划的⼀员，你的ID是：${this.id}`;
       console.log(firstNumber, secondNumber)
     },
   },

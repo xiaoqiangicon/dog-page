@@ -21,10 +21,11 @@
         <img class="page-c-text2" ref="pageCText2" src="http://imgs.zizaihome.com/50c9f8f9-5082-4b26-9c16-297422b04d63.png"  />
       </section>
       <section class="page-d bg-adaptive" ref="pageD">
-        <div class="page-d-guide" @click="clickPageDGuide" ref="pageDGuide" v-if="!hidePageDGuide">
-          <div class="page-d-guide-content">
+        <div class="page-d-guide" ref="pageDGuide" v-if="!hidePageDGuide">
+          <div class="page-d-guide-content" @click="clickPageDGuide">
             <img class="page-d-guide-avatar" src="http://imgs.zizaihome.com/f47fec32-2c2e-4e2e-bec8-0143d86d318d.png" />
             <div class="page-d-guide-tips">{{pageDTyper.output}}</div>
+            <div class="page-d-guide-continue" ref="pageDGuideContinue">点击继续</div>
           </div>
         </div>
         <img class="page-d-dog" src="http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png" />
@@ -40,7 +41,7 @@
           <div class="page-e-guide-content" @click="closePageEGuide">
             <img class="page-d-guide-avatar" src="http://imgs.zizaihome.com/f47fec32-2c2e-4e2e-bec8-0143d86d318d.png" />
             <div class="page-d-guide-tips">{{pageETyper.output}}</div>
-            <div class="page-d-guide-continue" ref="pageDGuideContinue">点击继续</div>
+            <div class="page-d-guide-continue" ref="pageEGuideContinue">点击继续</div>
           </div>
         </div>
         <div class="page-e-dog" :class="[`page-e-dog-${step}`]"></div>
