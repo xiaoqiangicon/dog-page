@@ -13,7 +13,7 @@ export default {
       pageATyper: {
         output: '',
         isEnd: false,
-        speed: 10,  // 80最佳
+        speed: 70,  // 80最佳
         singleBack: false,
         sleep: 0,
         type: 'normal',
@@ -34,7 +34,7 @@ export default {
       pageDTyper: {
         output: '',
         isEnd: false,
-        speed: 10,  // 80最佳
+        speed: 70,  // 80最佳
         singleBack: false,
         sleep: 0,
         type: 'normal',
@@ -154,7 +154,7 @@ export default {
       await this.transition(this.$refs.hole, {
         time: 2300,
         style: {
-          rotateZ: '-760deg',
+          rotateZ: '-1060deg',
           opacity: 0,
         }
       })
@@ -247,6 +247,7 @@ export default {
       })
     },
     async closePageEGuide() {
+      if (!this.pageETyperClose) return;
       await this.transition(this.$refs.pageEGuide, {
         time: 400,
         style: {
@@ -319,7 +320,7 @@ export default {
     async pageAfun() {
       this.pageBInit();
       await this.transition(this.$refs.pageA, {
-        time: 1000,
+        time: 500,
         style: {
           opacity: 0,
           zIndex: 0
@@ -330,7 +331,7 @@ export default {
     async pageBfun() {
       this.pageCInit();
       await this.transition(this.$refs.pageB, {
-        time: 1000,
+        time: 500,
         style: {
           opacity: 0,
           zIndex: -1
@@ -340,7 +341,7 @@ export default {
     async pageCfun() {
       this.pageDInit();
       await this.transition(this.$refs.pageC, {
-        time: 1000,
+        time: 500,
         style: {
           opacity: 0,
           zIndex: -1
@@ -372,7 +373,7 @@ export default {
     async pageDfun() {
       this.pageEInit();
       await this.transition(this.$refs.pageD, {
-        time: 1000,
+        time: 500,
         style: {
           opacity: 0,
           zIndex: -1
@@ -384,7 +385,7 @@ export default {
     async pageEfun() {
       this.initPageFInit();
       await this.transition(this.$refs.pageE, {
-        time: 1000,
+        time: 500,
         style: {
           opacity: 0,
           zIndex: -1
