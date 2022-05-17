@@ -1,5 +1,5 @@
 import EasyTyper from 'easy-typer-js';
-import { equip } from '../data';
+import { equip, generateRole } from '../data';
 
 let typeA = null;
 let typeD = null;
@@ -23,6 +23,7 @@ export default {
 
       pageBLoaded: true,
       pageBTimer: null,
+      isScan: false,
 
       pageCLoaded: false,
 
@@ -63,7 +64,7 @@ export default {
   },
   mounted() {
     this.pageAInit();
-    this.pageFRun();
+    // this.pageDInit();
   },
   beforeDestroy() {
     typeA = null;
@@ -93,12 +94,15 @@ export default {
     },
     pageBInit() {
       this.pageBLoaded = false;
+      this.isScan = false;
       this.$refs.pageB.style.opacity = 1;
       this.$refs.pageB.style.zIndex = 998;
     },
-    clickNailCheck() {
+    async clickNailCheck() {
+      this.isScan = true;
       this.pageBTimer = setTimeout(() => {
         this.pageBLoaded = true;
+        this.isScan = false;
         this.pageBfun().then(() => {
           this.transition(this.$refs.pageCText1, {
             time: 1000,
@@ -122,16 +126,47 @@ export default {
     },
     async clickDog() {
       await this.transition(this.$refs.hole, {
-        time: 500,
+        time: 300,
         style: {
           opacity: 1,
+          rotateZ: '10deg'
         }
       })
-      this.pageCfun();
+      this.transition(this.$refs.pageCDog, {
+        time: 2000,
+        style: {
+          rotateZ: '760deg',
+          scale: '.2',
+          opacity: 0,
+        }
+      })
+      this.transition(this.$refs.pageCText2, {
+        time: 1000,
+        style: {
+          opacity: 0,
+        }
+      })
+      await this.transition(this.$refs.hole, {
+        time: 2300,
+        style: {
+          rotateZ: '-760deg',
+          opacity: 0,
+        }
+      })
+      await this.pageCfun();
+      await this.pageDInit();
     },
 
     pageDInit() {
+      this.hidePageDGuide = false;
       this.pageDTyperClose = false;
+      this.setEquip = [];
+      this.equip.forEach(equip => {
+        equip.selected = false;
+      })
+      this.$refs.pageD.opacity = 1;
+      this.$refs.pageD.style.zIndex = 9996;
+      this.initPageDType();
     },
     initPageDType() {
       this.pageDoutput = `欢迎编号${this.id}正式加⼊100%BEATS计划，请从以下列表中选择两件贴⾝物品，准备登舰。`
@@ -165,11 +200,14 @@ export default {
       this.setEquip.push(equip);
       equip.selected = true;
     },
-    clickPageDBtn() {
-      this.pageDfun();
+    async clickPageDBtn() {
+      if (this.setEquip.length < 2) return;
+      let role = generateRole[this.setEquip[0].id - 1][this.setEquip[1].id - 1];
+      console.log(this.setEquip[0].id, this.setEquip[1].id, 'role', role.name);
+      await this.pageDfun();
     },
 
-    initPageDType() {
+    initPageEType() {
       this.pageEoutput = `100%BEATS号准备发射，现在为您准备了⽓氛助燃剂，务必点击饮下，时刻确保进⼊你的最佳状态！`;
       typeD = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
     },
@@ -196,6 +234,10 @@ export default {
         }
       })
     },
+    async clickPageEBtn() {
+      await this.pageEfun();
+      await this.pageFRun();
+    },
     async pageFRun() {
       await this.transition(this.$refs.hot, {
         time: 1000,
@@ -204,9 +246,28 @@ export default {
         }
       })
       await this.transition(this.$refs.fire, {
-        time: 200,
+        time: 500,
         style: {
           opacity: 1,
+        }
+      })
+      await this.transition(this.$refs.rocketBox, {
+        time: 3000,
+        style: {
+          top: '-4.39rem'
+        }
+      })
+      await this.transition(this.$refs.fire, {
+        time: 500,
+        style: {
+          opacity: 0
+        }
+      })
+      await this.transition(this.$refs.pageF, {
+        time: 200,
+        style: {
+          opacity: 0,
+          zIndex: -1,
         }
       })
     },
@@ -239,6 +300,15 @@ export default {
     },
     async pageDfun() {
       await this.transition(this.$refs.pageD, {
+        time: 1000,
+        style: {
+          opacity: 0,
+          zIndex: -1
+        }
+      })
+    },
+    async pageEfun() {
+      await this.transition(this.$refs.pageE, {
         time: 1000,
         style: {
           opacity: 0,
