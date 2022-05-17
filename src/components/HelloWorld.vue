@@ -8,26 +8,26 @@
         </div>
       </section>
       <section class="page-b bg-adaptive" ref="pageB">
-        <div class="nail-box" @click="clickNailCheck">
+        <div class="nail-box" @touchstart="clickNailCheck">
           <div class="nail-line-box">
             <div class="nail-line" :class="{'nail-line-active': isScan}"></div>
           </div>
         </div>
       </section>
       <section class="page-c bg-adaptive" ref="pageC">
-        <img class="page-c-dog" @click="clickDog" src="../assets/bluedash/2/2-狗子.png" ref="pageCDog"/>
-        <img class="page-c-hole" ref="hole" src="../assets/bluedash/黑洞.png" />
-        <img class="page-c-text1" ref="pageCText1" src="../assets/bluedash/1/1-狗出现后的文字1.png" />
-        <img class="page-c-text2" ref="pageCText2" src="../assets/bluedash/1/1-狗出现的文字2.png"  />
+        <img class="page-c-dog" @click="clickDog" src="http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png" ref="pageCDog"/>
+        <img class="page-c-hole" ref="hole" src="http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png" />
+        <img class="page-c-text1" ref="pageCText1" src="http://imgs.zizaihome.com/b082d74d-f04c-4e64-853e-a54da34e0890.png" />
+        <img class="page-c-text2" ref="pageCText2" src="http://imgs.zizaihome.com/50c9f8f9-5082-4b26-9c16-297422b04d63.png"  />
       </section>
       <section class="page-d bg-adaptive" ref="pageD">
-        <div class="page-d-guide" @click="clickPageDGuide" v-if="!hidePageDGuide">
+        <div class="page-d-guide" @click="clickPageDGuide" ref="pageDGuide" v-if="!hidePageDGuide">
           <div class="page-d-guide-content">
-            <img class="page-d-guide-avatar" src="../assets/bluedash/2/2-对话框里的头像.png" />
+            <img class="page-d-guide-avatar" src="http://imgs.zizaihome.com/f47fec32-2c2e-4e2e-bec8-0143d86d318d.png" />
             <div class="page-d-guide-tips">{{pageDTyper.output}}</div>
           </div>
         </div>
-        <img class="page-d-dog" src="../assets/bluedash/2/2-狗子.png" />
+        <img class="page-d-dog" src="http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png" />
         <div class="equip-box">
           <div class="equip-item" :class="{'equip-item-gray': item.selected}" @click="addEquip(item)" v-for="(item) in equip" :key="item.icon">
             <img :src="item.icon" class="equip" />
@@ -36,24 +36,33 @@
         <div class="page-d-btn" :class="{'page-d-btn-active': setEquip.length === 2}" @click="clickPageDBtn"></div>
       </section>
       <section class="page-e bg-adaptive" ref="pageE">
-        <div class="page-e-guide" v-if="!hidePageEGuide">
-          <div class="page-e-guide-content"></div>
+        <div class="page-e-guide" ref="pageEGuide" v-if="!hidePageEGuide">
+          <div class="page-e-guide-content" @click="closePageEGuide">
+            <img class="page-d-guide-avatar" src="http://imgs.zizaihome.com/f47fec32-2c2e-4e2e-bec8-0143d86d318d.png" />
+            <div class="page-d-guide-tips">{{pageETyper.output}}</div>
+            <div class="page-d-guide-continue" ref="pageDGuideContinue">点击继续</div>
+          </div>
         </div>
         <div class="page-e-dog" :class="[`page-e-dog-${step}`]"></div>
-        <div class="page-e-bar"></div>
+        <div class="page-e-bar" :class="[`page-e-bar-${step}`]">
+          
+        </div>
         <div class="page-e-circle" @click="clickPageECircle" ref="pageECircle"></div>
         <div class="page-e-btn" @click="clickPageEBtn"></div>
       </section>
       <section class="page-f bg-adaptive" ref="pageF">
-        <img class="page-f-bg" src="../assets/bluedash/5/5-背景浮标.png" />
+        <img class="page-f-bg" src="http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png" />
         <div class="page-f-rocket-box" ref="rocketBox">
-          <img class="page-f-rocket" ref="rocket" src="../assets/bluedash/5/5-火箭.png" />
-          <img class="page-f-hot" ref="hot" src="../assets/bluedash/5/5-火箭动画用-大火.png" />
+          <img class="page-f-rocket" ref="rocket" src="http://imgs.zizaihome.com/221bee14-beed-41b2-bb5d-237af58bfb1d.png" />
+          <img class="page-f-hot" ref="hot" src="http://imgs.zizaihome.com/fd072ee4-4544-4d5f-94d1-c8b76ba6794f.png" />
         </div>
-        <img class="page-f-fire" ref="fire" src="../assets/bluedash/5/5-火箭动画用火苗.png" />
+        <img class="page-f-fire" ref="fire" src="http://imgs.zizaihome.com/ceebebd4-31ca-44e9-ad76-809b3d6b725b.png" />
       </section>
       <section class="page-g bg-adaptive" ref="pageG">
-        
+        <div id="share" class="page-g-share" ref="share">
+          <img class="page-g-bg" style="position: absolute;left: 0; top: 0;" src="http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg" />
+        </div>
+        <button style="position: absolute;left: 0; top: 0;" @click="playAgain">再玩一次</button>
       </section>
     </section>
   </div>

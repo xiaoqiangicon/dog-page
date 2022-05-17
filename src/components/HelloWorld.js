@@ -3,6 +3,7 @@ import { equip, generateRole } from '../data';
 
 let typeA = null;
 let typeD = null;
+let typeE = null;
 export default {
   name: 'HelloWorld',
   data() {
@@ -29,6 +30,7 @@ export default {
 
       hidePageDGuide: false,
       pageDLoaded: false,
+      pageDoutput: ``,
       pageDTyper: {
         output: '',
         isEnd: false,
@@ -43,8 +45,9 @@ export default {
       equip,
       setEquip: [],
 
-      hidePageEGuide: true,
+      hidePageEGuide: false,
       pageELoaded: false,
+      pageEoutput: ``,
       pageETyper: {
         output: '',
         isEnd: false,
@@ -69,12 +72,15 @@ export default {
   beforeDestroy() {
     typeA = null;
     typeD = null;
+    typeE = null;
     this.pageBTimer = null;
   },
   methods: {
     init() {
       this.pageAInit();
       this.pageBInit();
+      this.pageCInit();
+      this.pageDInit();
     },
     pageAInit() {
       this.pageALoaded = false;
@@ -176,10 +182,15 @@ export default {
       this.hidePageDGuide = false;
       this.pageDTyperClose = true;
     },
-    clickPageDGuide() {
-      if (this.pageDTyperClose) {
-        this.hidePageDGuide = true;
-      }
+    async clickPageDGuide() {
+      if (!this.pageDTyperClose) return; 
+      await this.transition(this.$refs.pageDGuide, {
+        time: 400,
+        style: {
+          opacity: 0,
+        }
+      })
+      this.hidePageDGuide = true;
     },
     addEquip(equip) {
       if (this.setEquip[0] && this.setEquip[0].id === equip.id) {
@@ -205,21 +216,42 @@ export default {
       let role = generateRole[this.setEquip[0].id - 1][this.setEquip[1].id - 1];
       console.log(this.setEquip[0].id, this.setEquip[1].id, 'role', role.name);
       await this.pageDfun();
+      await this.pageEInit();
     },
 
+    pageEInit() {
+      this.hidePageEGuide = false;
+      this.pageETyperClose = false;
+      this.initPageEType();
+    },
     initPageEType() {
       this.pageEoutput = `100%BEATS号准备发射，现在为您准备了⽓氛助燃剂，务必点击饮下，时刻确保进⼊你的最佳状态！`;
-      typeD = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
+      typeE = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
     },
     pageEOnloaded() {
       this.hidePageEGuide = false;
       this.pageETyperClose = true;
+      this.transition(this.$refs.pageDGuideContinue, {
+        time: 400,
+        style: {
+          opacity: 1,
+        }
+      })
+    },
+    async closePageEGuide() {
+      await this.transition(this.$refs.pageEGuide, {
+        time: 400,
+        style: {
+          opacity: 0,
+        }
+      })
+      this.hidePageEGuide = true;
     },
     async clickPageECircle() {
-      if (this.step < 4) {
+      if (this.step < 3) {
         this.step++;
       } else {
-        this.step = 1;
+        this.step = 0;
       }
       await this.transition(this.$refs.pageECircle, {
         time: 100,
@@ -270,6 +302,9 @@ export default {
           zIndex: -1,
         }
       })
+    },
+    playAgain() {
+      this.init();
     },
     async pageAfun() {
       await this.transition(this.$refs.pageA, {
