@@ -24,7 +24,6 @@ export default {
 
       pageBLoaded: true,
       pageBTimer: null,
-      isScan: false,
 
       pageCLoaded: false,
 
@@ -99,37 +98,43 @@ export default {
     },
     pageBInit() {
       this.pageBLoaded = false;
-      this.isScan = false;
       this.$refs.pageB.style.opacity = 1;
       this.$refs.pageB.style.zIndex = 998;
     },
     async clickNailCheck() {
-      this.isScan = true;
-      this.pageBTimer = setTimeout(() => {
-        this.pageBLoaded = true;
-        this.isScan = false;
-        this.pageBfun().then(() => {
-          this.transition(this.$refs.pageCText1, {
-            time: 1000,
-            style: {
-              opacity: 0,
-            }
-          }).then(() => {
-            this.transition(this.$refs.pageCText2, {
-              time: 1000,
-              style: {
-                opacity: 1,
-              }
-            })
-          })
-        });
-      }, 1500);
+      await this.transition(this.$refs.nailLine, {
+        time: 1500,
+        style: {
+          top: '0rem',
+        }
+      })
+      await this.transition(this.$refs.nailLine, {
+        time: 300,
+        style: {
+          opacity: 0,
+        }
+      })
+      await this.pageBfun();
+      await this.transition(this.$refs.pageCText1, {
+        time: 1000,
+        style: {
+          opacity: 0,
+        }
+      })
+      await this.transition(this.$refs.pageCText2, {
+        time: 1000,
+        style: {
+          opacity: 1,
+        }
+      })
+      this.pageCLoaded = true;
     },
     pageCInit() {
       this.$refs.pageC.style.opacity = 1;
       this.$refs.pageC.style.zIndex = 997;
     },
     async clickDog() {
+      if (!this.pageCLoaded) return;
       await this.transition(this.$refs.hole, {
         time: 300,
         style: {
@@ -154,7 +159,7 @@ export default {
       await this.transition(this.$refs.hole, {
         time: 2300,
         style: {
-          rotateZ: '-1060deg',
+          // rotateZ: '-1060deg',
           opacity: 0,
         }
       })
@@ -335,6 +340,13 @@ export default {
         style: {
           opacity: 0,
           zIndex: -1
+        }
+      })
+      this.transition(this.$refs.nailLine, {
+        time: 10,
+        style: {
+          opacity: 1,
+          top: '-2.48rem'
         }
       })
     },

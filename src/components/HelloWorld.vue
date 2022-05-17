@@ -10,7 +10,7 @@
       <section class="page-b bg-adaptive" ref="pageB">
         <div class="nail-box" @touchstart="clickNailCheck">
           <div class="nail-line-box">
-            <div class="nail-line" :class="{'nail-line-active': isScan}"></div>
+            <div class="nail-line" ref="nailLine"></div>
           </div>
         </div>
       </section>
@@ -28,7 +28,10 @@
             <div class="page-d-guide-continue" ref="pageDGuideContinue">点击继续</div>
           </div>
         </div>
-        <img class="page-d-dog" src="http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png" />
+        <div class="page-d-dog-box">
+          <img class="page-d-dog" src="http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png" />
+          <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
+        </div>
         <div class="equip-box">
           <div class="equip-item" :class="{'equip-item-gray': item.selected}" @click="addEquip(item)" v-for="(item) in equip" :key="item.icon">
             <img :src="item.icon" class="equip" />
@@ -44,10 +47,10 @@
             <div class="page-d-guide-continue" ref="pageEGuideContinue">点击继续</div>
           </div>
         </div>
-        <div class="page-e-dog" :class="[`page-e-dog-${step}`]"></div>
-        <div class="page-e-bar" :class="[`page-e-bar-${step}`]">
-          
+        <div class="page-e-dog" :class="[`page-e-dog-${step}`]">
+          <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
         </div>
+        <div class="page-e-bar" :class="[`page-e-bar-${step}`]"></div>
         <div class="page-e-circle" @click="clickPageECircle" ref="pageECircle"></div>
         <div class="page-e-btn" @click="clickPageEBtn"></div>
       </section>

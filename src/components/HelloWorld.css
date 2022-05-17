@@ -73,8 +73,9 @@
   background-size: 100% 2.46rem;
 }
 .nail-line-active {
+  /*
   animation: lineMove 1.5s ease-in-out infinite;
-  -webkit-animation: lineMove 1.5s ease-in-out infinite;
+  -webkit-animation: lineMove 1.5s ease-in-out infinite; */
 }
 @keyframes lineMove {
   0% {
@@ -172,12 +173,84 @@
   background-size: 100% 100%;
   z-index: 996;
 }
-.page-d-dog {
+.page-d-dog-box {
   position: absolute;
   top: .8rem;
+  height: 1.44rem;
   left: 50%;
   transform: translate(-36%);
   width: .9rem;
+}
+.page-d-dog {
+  width: .9rem;
+}
+.page-d-icon {
+  position: absolute;
+  opacity: 0;
+}
+.page-d-icon-1 {
+  left: .06rem;
+  top: -.16rem;
+  opacity: 0;
+  width: .59rem;
+}
+.page-d-icon-2 {
+  top: -.16rem;
+  left: .16rem;
+  width: .57rem;
+  opacity: 0;
+}
+.page-d-icon-3 {
+  top: -.0rem;
+  right: .04rem;
+  width: .67rem;
+}
+.page-d-icon-4 {
+  left: -.1rem;
+  top: -.2rem;
+  width: .7rem;
+}
+.page-d-icon-5 {
+  left: -.26rem;
+  top: -.28rem;
+  width: .49rem;
+}
+.page-d-icon-6 {
+  left: 0rem;
+  top: .8rem;
+  width: .9rem;
+}
+.page-d-icon-7 {
+  width: .6rem;
+  bottom: 0;
+  left: .15rem;
+}
+.page-d-icon-8 {
+  left: 0;
+  width: .5rem;
+}
+.page-d-icon-9 {
+  right: .2rem;
+  top: .3rem;
+  width: .5rem;
+}
+.page-d-icon-10 {
+  left: .22rem;
+  top: -0.05rem;
+  width: .4rem;
+}
+.page-d-icon-11 {
+  left: -0.3rem;
+  top: .2rem;
+  width: .36rem;
+}
+.page-d-icon-12 {
+  right: .18rem;
+  top: .4rem;
+  width: .3rem;
+}
+.page-d-icon-active {
+  opacity: 1;
 }
 
 
@@ -288,10 +361,10 @@
 .page-e-dog {
   position: absolute;
   left: 50%;
-  top: 1.3rem;
-  transform: translateX(-50%);
-  width: 1.21rem;
-  height: 2.07rem;
+  top: 1.2rem;
+  transform: translateX(-50%) scale(1.2);
+  width: .9rem;
+  height: 1.51rem;
   background-size: 100% 100%;
 }
 .page-e-dog-0 {
@@ -397,12 +470,12 @@
 }
 @media only screen and (min-height: 640px) {
   .page-e-dog {
-    top: 21vh;
+    top: 25vh;
   }
 }
 /* iphone 12 pro XR 896+ */
 @media only screen and (min-height: 740px) {
   .page-e-dog {
-    top: 24vh
+    top: 29vh
   }
 }
