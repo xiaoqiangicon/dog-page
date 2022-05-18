@@ -1,9 +1,11 @@
+import axios from 'axios';
 import EasyTyper from 'easy-typer-js';
 import { equip, generateRole } from '../data';
 
 let typeA = null;
 let typeD = null;
 let typeE = null;
+let fetchUrl = 'http://miniapp.lencooltech.com/blue_dash/getResult'
 export default {
   name: 'HelloWorld',
   data() {
@@ -59,10 +61,19 @@ export default {
       },
       pageETyperClose: false,
       step: 1,
+
+      isPageFLoaded: false,
     }
   },
   created() {
     this.renderId();
+  },
+  watch: {
+    isPageFLoaded(newVal) {
+      if (newVal) {
+        this.pageFRun();
+      }
+    }
   },
   mounted() {
     this.pageAInit();
@@ -116,13 +127,19 @@ export default {
       })
       await this.pageBfun();
       await this.transition(this.$refs.pageCText1, {
-        time: 1000,
+        time: 400,
+        style: {
+          opacity: 1,
+        }
+      })
+      await this.transition(this.$refs.pageCText1, {
+        time: 1200,
         style: {
           opacity: 0,
         }
       })
       await this.transition(this.$refs.pageCText2, {
-        time: 1000,
+        time: 900,
         style: {
           opacity: 1,
         }
@@ -157,7 +174,7 @@ export default {
         }
       })
       await this.transition(this.$refs.hole, {
-        time: 2300,
+        time: 2000,
         style: {
           // rotateZ: '-1060deg',
           opacity: 0,
@@ -166,7 +183,6 @@ export default {
       await this.pageCfun();
       await this.pageDInit();
     },
-
     pageDInit() {
       this.hidePageDGuide = false;
       this.pageDTyperClose = false;
@@ -176,7 +192,6 @@ export default {
       })
       this.$refs.pageD.style.opacity = 1;
       this.$refs.pageD.style.zIndex = 996;
-      
     },
     initPageDType() {
       this.pageDoutput = `欢迎编号${this.id}正式加⼊100%BEATS计划，请从以下列表中选择两件贴⾝物品，准备登舰。`
@@ -202,7 +217,7 @@ export default {
       })
       this.hidePageDGuide = true;
     },
-    addEquip(equip) {
+    async addEquip(equip) {
       if (this.setEquip[0] && this.setEquip[0].id === equip.id) {
         this.setEquip[0].selected = false;
         this.setEquip.shift();
@@ -213,6 +228,22 @@ export default {
         this.setEquip.pop();
         return;
       }
+
+      //设置装备提示语
+      for(let i = 1; i<=12; i++) {
+        this.transition(this.$refs[`pageDIconTip${i}`], {
+          time: 200,
+          style: {
+            opacity: 0
+          }
+        })
+      }
+      this.transition(this.$refs[`pageDIconTip${equip.id}`], {
+        time: 300,
+        style: {
+          opacity: 1,
+        }
+      })
       if (this.setEquip.length >= 2) {
         this.setEquip[0].selected = false;
         this.setEquip=[this.setEquip[1]];
@@ -282,7 +313,23 @@ export default {
     },
     async clickPageEBtn() {
       await this.pageEfun();
-      await this.pageFRun();
+      this.isPageFLoaded = true;
+      axios({
+        url: fetchUrl,
+        method: 'get',
+        params: {
+          id: window.globalData.id,
+          item1: this.setEquip[0].id - 1,
+          item2: this.setEquip[1].id - 1,
+          dogState: this.step
+        }
+      }).then(response => {
+        console.log(response, 'response')
+      })
+      .catch(error => {
+        Indicator.close();
+        console.log('error' + error);
+      });
     },
     initPageFInit() {
       this.$refs.pageF.style.opacity = 1;
@@ -304,7 +351,7 @@ export default {
       await this.transition(this.$refs.rocketBox, {
         time: 3000,
         style: {
-          top: '-4.39rem'
+          bottom: '8.3rem'
         }
       })
       await this.transition(this.$refs.fire, {
@@ -314,6 +361,9 @@ export default {
         }
       })
       await this.pageFfun();
+
+      // 复原火箭初始状态
+      this.isPageFLoaded = false;
     },
     playAgain() {
       this.init();
@@ -353,12 +403,13 @@ export default {
     async pageCfun() {
       this.pageDInit();
       await this.transition(this.$refs.pageC, {
-        time: 500,
+        time: 200,
         style: {
           opacity: 0,
           zIndex: -1
         }
       })
+      // 复原页面C初始状态
       this.transition(this.$refs.hole, {
         time: 10,
         style: {
@@ -374,12 +425,19 @@ export default {
           opacity: 1,
         }
       })
+      this.transition(this.$refs.pageCText1, {
+        time: 10,
+        style: {
+          opacity: 0,
+        }
+      })
       this.transition(this.$refs.pageCText2, {
         time: 10,
         style: {
-          opacity: 1,
+          opacity: 0,
         }
       })
+      this.pageCLoaded = false; 
       await this.initPageDType();
     },
     async pageDfun() {
@@ -392,7 +450,16 @@ export default {
         }
       })
       await this.initPageEType();
+      // 复原pageD
       this.pageDTyper.output = '';
+      for(let i = 1; i<=12; i++) {
+        this.transition(this.$refs[`pageDIconTip${i}`], {
+          time: 200,
+          style: {
+            opacity: 0
+          }
+        })
+      }
     },
     async pageEfun() {
       this.initPageFInit();
@@ -412,6 +479,24 @@ export default {
         style: {
           opacity: 0,
           zIndex: -1,
+        }
+      })
+      this.transition(this.$refs.hot, {
+        time: 10,
+        style: {
+          scale: '1',
+        }
+      })
+      this.transition(this.$refs.rocketBox, {
+        time: 10,
+        style: {
+          bottom: '0rem'
+        }
+      })
+      this.transition(this.$refs.fire, {
+        time: 10,
+        style: {
+          opacity: 0
         }
       })
     },

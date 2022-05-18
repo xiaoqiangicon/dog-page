@@ -32,6 +32,7 @@
           <img class="page-d-dog" src="http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png" />
           <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
         </div>
+        <p class="page-d-icon-tip" :class="[`page-d-icon-tip-${item.id}`]" v-for="(item) in equip" :key="item.descor" :ref="'pageDIconTip' + item.id">{{ item.tips }}</p>
         <div class="equip-box">
           <div class="equip-item" :class="{'equip-item-gray': item.selected}" @click="addEquip(item)" v-for="(item) in equip" :key="item.icon">
             <img :src="item.icon" class="equip" />
