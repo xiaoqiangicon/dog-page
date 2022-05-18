@@ -10,7 +10,7 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      id: '',
+      // id: '',
       pageAoutput: ``,
       pageATyper: {
         output: '',
@@ -66,7 +66,15 @@ export default {
     }
   },
   created() {
-    this.renderId();
+    // this.renderId();
+  },
+  computed: {
+    nickName () {
+      return (window.globalData && window.globalData.nickName) || '未获取';
+    },
+    id() {
+      return (window.global && window.globalData.id) || '未获取';
+    }
   },
   watch: {
     isPageFLoaded(newVal) {
@@ -318,7 +326,7 @@ export default {
         url: fetchUrl,
         method: 'get',
         params: {
-          id: window.globalData.id,
+          id: this.id,
           item1: this.setEquip[0].id - 1,
           item2: this.setEquip[1].id - 1,
           dogState: this.step
@@ -513,7 +521,7 @@ export default {
       let second = letters[secondNumber];
       
       let number = Math.floor(Math.random() * 10000);
-      this.id = first + second + number;
+      // this.id = first + second + number;
       console.log(firstNumber, secondNumber)
     },
   },
