@@ -52,8 +52,8 @@
           <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
         </div>
         <div class="page-e-bar" :class="[`page-e-bar-${step}`]"></div>
-        <div class="page-e-circle" @click="clickPageECircle" ref="pageECircle"></div>
-        <div class="page-e-btn" @click="clickPageEBtn"></div>
+        <div class="page-e-circle" @click="clickPageECircle" ref="pageECircle" v-if="hidePageEGuide"></div>
+        <div class="page-e-btn" @click="clickPageEBtn" v-if="hidePageEGuide"></div>
       </section>
       <section class="page-f bg-adaptive" ref="pageF">
         <img class="page-f-bg" src="http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png" />
@@ -82,6 +82,9 @@
       preload
       type="audio/mpeg"
     ></audio>
+    <!-- iphone只有点击元素才会加载音频，这样可以提前加载到 -->
+    <img src="http://imgs.zizaihome.com/326426b4-966d-4a6a-b929-b5b1715191bb.wav" style="opacity: 0" />
+    <img src="http://imgs.zizaihome.com/bc7895ad-39b3-4a54-a436-2d41f19751aa.wav" style="opacity: 0" />
   </div>
 </template>
 
