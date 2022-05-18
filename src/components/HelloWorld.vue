@@ -70,6 +70,18 @@
         <button style="position: absolute;left: 0; top: 0;" @click="playAgain">再玩一次</button>
       </section>
     </section>
+    <audio
+      ref="equipAudio"
+      src="http://imgs.zizaihome.com/326426b4-966d-4a6a-b929-b5b1715191bb.wav"
+      preload
+      type="audio/mpeg"
+    ></audio>
+    <audio
+      ref="btnAudio"
+      src="http://imgs.zizaihome.com/bc7895ad-39b3-4a54-a436-2d41f19751aa.wav"
+      preload
+      type="audio/mpeg"
+    ></audio>
   </div>
 </template>
 

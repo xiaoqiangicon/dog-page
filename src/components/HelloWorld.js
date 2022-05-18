@@ -226,6 +226,10 @@ export default {
       this.hidePageDGuide = true;
     },
     async addEquip(equip) {
+      let equipAudio = this.$refs.equipAudio;
+      equipAudio.pause();
+      equipAudio.currentTime = 0;
+      equipAudio.play();
       if (this.setEquip[0] && this.setEquip[0].id === equip.id) {
         this.setEquip[0].selected = false;
         this.setEquip.shift();
@@ -306,6 +310,10 @@ export default {
       } else {
         this.step = 0;
       }
+      let btnAudio = this.$refs.btnAudio;
+      btnAudio.pause();
+      btnAudio.currentTime = 0;
+      btnAudio.play();
       await this.transition(this.$refs.pageECircle, {
         time: 100,
         style: {
@@ -322,6 +330,7 @@ export default {
     async clickPageEBtn() {
       await this.pageEfun();
       this.isPageFLoaded = true;
+      return;
       axios({
         url: fetchUrl,
         method: 'get',
@@ -345,27 +354,58 @@ export default {
     },
     async pageFRun() {
       await this.transition(this.$refs.hot, {
-        time: 1000,
+        time: 300,
         style: {
-          scale: '1.2',
+          opacity: 1,
+          width: '1.5rem',
+          left: '1.125rem',
+          height: '1.1rem'
         }
       })
+      await this.transition(this.$refs.hot, {
+        time: 0,
+        style: {
+          opacity: 1,
+          width: '1rem',
+          left: '1.375rem',
+          height: '.88rem'
+        }
+      })
+      await this.transition(this.$refs.hot, {
+        time: 200,
+        style: {
+          opacity: 1,
+          width: '1.6rem',
+          left: '1.125rem',
+          height: '1.3rem'
+        }
+      })
+      
       await this.transition(this.$refs.fire, {
-        time: 500,
+        time: 100,
         style: {
           opacity: 1,
         }
       })
-      await this.transition(this.$refs.rocketBox, {
-        time: 3000,
+      this.transition(this.$refs.rocketBox, {
+        time: 800,
         style: {
-          bottom: '8.3rem'
+          bottom: '8.3rem',
         }
       })
       await this.transition(this.$refs.fire, {
         time: 500,
         style: {
-          opacity: 0
+          opacity: 0,
+          easing: 'sinOut',
+        }
+      })
+      // 拖时间
+      await this.transition(this.$refs.fire, {
+        time: 600,
+        style: {
+          opacity: 0,
+          easing: 'sinOut',
         }
       })
       await this.pageFfun();
@@ -483,34 +523,45 @@ export default {
     async pageFfun() {
       this.initPageGInit();
       await this.transition(this.$refs.pageF, {
-        time: 200,
+        time: 500,
         style: {
           opacity: 0,
           zIndex: -1,
         }
       })
-      this.transition(this.$refs.hot, {
-        time: 10,
-        style: {
-          scale: '1',
-        }
-      })
-      this.transition(this.$refs.rocketBox, {
-        time: 10,
+      // 因为之前运动是异步的，可能那边还没有执行完这里就开始跑了，防冲突
+      await this.transition(this.$refs.rocketBox, {
+        time: 1000,
         style: {
           bottom: '0rem'
         }
       })
-      this.transition(this.$refs.fire, {
-        time: 10,
+      await this.transition(this.$refs.rocketBox, {
+        time: 0,
+        style: {
+          bottom: '0rem',
+        }
+      })
+      await this.transition(this.$refs.hot, {
+        time: 0,
+        style: {
+          opacity: 0,
+          width: '1rem',
+          height: '.88rem',
+          left: '1.375rem',
+        }
+      })
+      await this.transition(this.$refs.fire, {
+        time: 0,
         style: {
           opacity: 0
         }
       })
+      console.log('why')
     },
     transition (el, options) {
       return new Promise((resolve, reject) => {
-        resolve(window.Velocity(el, options.style, options.time))
+        resolve(window.Velocity(el, options.style, {duration: options.time, easing: options.easing || 'linear', complete: options.complete || function() {}}))
       })
     },
     renderId() {
