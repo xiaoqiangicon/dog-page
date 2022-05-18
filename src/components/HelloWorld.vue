@@ -68,6 +68,14 @@
           <img class="page-g-bg" style="position: absolute;left: 0; top: 0;" :src="resultImage" />
         </div>
         <div class="play-again" src="http://imgs.zizaihome.com/0eeb05c2-d297-476c-9c03-7d1a70581278.png" @click="playAgain" />
+        <button @click="getShareImg" style="position: absolute; z-index: 10000">生成分享图</button>
+      </section>
+      <section class="page-h bg-adaptive" ref="pageH">
+        <div id="share" class="page-g-share" ref="share">
+          <img class="page-g-bg" style="position: absolute;left: 0; top: 0;" :src="shareImage" />
+        </div>
+        <div class="play-again" src="http://imgs.zizaihome.com/0eeb05c2-d297-476c-9c03-7d1a70581278.png" @click="playAgain" />
+        
       </section>
     </section>
     <audio

@@ -444,6 +444,18 @@ export default {
     playAgain() {
       this.init();
     },
+    async getShareImg() {
+      console.log(123)
+      this.$refs.pageH.zIndex = 992;
+      this.$refs.pageH.opacity = 1;
+      await this.transition(this.$refs.pageG, {
+        time: 500,
+        style: {
+          opacity: 0,
+          zIndex: 0
+        }
+      })
+    },
     initPageGInit() {
       this.$refs.pageG.style.opacity = 1;
       this.$refs.pageG.style.zIndex = 993;

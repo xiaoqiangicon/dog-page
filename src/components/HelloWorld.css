@@ -505,6 +505,11 @@
   width: 1.43rem;
   transform: translateX(-50%);
 }
+
+.page-h {
+  z-index: 992;
+  background-color: rgba(128, 128, 128, .6);
+}
 @media only screen and (max-height: 505px) {
   .page-d-dog-box {
     top: .6rem;
