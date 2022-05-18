@@ -29,7 +29,6 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import initShare from './components/init-share';
 
 export default {
   name: 'App',
@@ -42,13 +41,7 @@ export default {
     HelloWorld
   },
   created() {
-    // initShare({
-    //   title: '标题',
-    //   desc:
-    //     '描述',
-    //   link: window.location.href,
-    //   imgUrl: 'http://imgs.zizaihome.com/04924591-37d4-4d6b-9dd1-f50f21990012.png',
-    // });
+
   },
   methods: {
     playMusic() {

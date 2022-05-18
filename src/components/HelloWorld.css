@@ -16,7 +16,7 @@
 .page-a,
 .page-b,
 .page-c {
-  background: url('http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg'); 
+  background: url('../static/1-背景.jpg'); 
   background-size: 100% 100%;
 }
 .page-a {
@@ -52,7 +52,7 @@
   width: 1.9rem;
   height: 2.9rem;
   overflow: hidden;
-  background-image: url('http://imgs.zizaihome.com/2c8abf08-85e9-445e-8929-683ec4d2957c.png');
+  background-image: url('../static/1-指纹.png');
   background-size: 1.9rem 2.9rem;
 }
 .nail-line-box {
@@ -69,7 +69,7 @@
   left: 0;
   width: 1.9rem;
   height: 2.46rem;
-  background: url('http://imgs.zizaihome.com/225fcbe1-a0db-4fdf-923f-e73d62ea7588.png') center center;
+  background: url('../static/图.png') center center;
   background-size: 100% 2.46rem;
 }
 .nail-line-active {
@@ -170,7 +170,7 @@
 
 
 .page-d {
-  background-image: url('http://imgs.zizaihome.com/93fafe67-ec07-403e-bc7b-e26874f4e528.jpg');
+  background-image: url('../static/2-背景.jpg');
   background-size: 100% 100%;
   z-index: 996;
 }
@@ -295,7 +295,7 @@
   left: 0;
   width: 100%;
   height: 1.5rem;
-  background-image: url('http://imgs.zizaihome.com/8c869f56-23a9-4d2f-aea7-c5284315df66.png');
+  background-image: url('../static/2-对话框.png');
   background-size: 100% 100%;
 }
 .page-d-guide-avatar {
@@ -340,7 +340,7 @@
   width: .67rem;
   height: .6rem;
   margin-bottom: .14rem;
-  background: url('http://imgs.zizaihome.com/0d107eeb-b664-46de-a4a5-1873f2d15f58.png');
+  background: url('../static/2-道具框.png');
   background-size: 100% 100%;
 }
 .equip-item:nth-of-type(3n) {
@@ -359,18 +359,18 @@
   transform: translate(-50%);
   width: 1.75rem;
   height: .62rem;
-  background: url('http://imgs.zizaihome.com/32e61c8f-f9e0-469a-9330-db37f87578c1.png');
+  background: url('../static/2-按钮未启动.png');
   background-size: 100% 100%;
 }
 .page-d-btn-active {
-  background: url('http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png');
+  background: url('../static/22-按钮亮起.png');
   background-size: 1.75rem .62rem;
 }
 
 
 .page-e {
   z-index: 995;
-  background: url('http://imgs.zizaihome.com/fbbfdcff-46ef-4279-a1c0-340b5418bfc1.jpg');
+  background: url('../static/3-背景.jpg');
   background-size: 100% 100%;
 }
 .page-e-guide-content {
@@ -381,7 +381,7 @@
   height: 1.64rem;
   font-size: 14px;
   color: #fff;
-  background-image: url('http://imgs.zizaihome.com/8c869f56-23a9-4d2f-aea7-c5284315df66.png');
+  background-image: url('../static/2-对话框.png');
   background-size: 100% 100%;
   word-break:break-all
 }
@@ -395,16 +395,16 @@
   background-size: 100% 100%;
 }
 .page-e-dog-0 {
-  background-image: url('http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png');
+  background-image: url('../static/3-有点意思的-2.png');
 }
 .page-e-dog-1 {
-  background-image: url('http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png');
+  background-image: url('../static/3-感觉来了的-1.png');
 }
 .page-e-dog-2 {
-  background-image: url('http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png');
+  background-image: url('../static/3-燃起来了的-3.png');
 }
 .page-e-dog-3 {
-  background-image: url('http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png');
+  background-image: url('../static/3-然进云霄了的-4.png');
 }
 .page-e-bar {
   position: absolute;
@@ -415,24 +415,24 @@
   background-size: 100% 100%;
 }
 .page-e-bar-0 {
-  background-image: url('http://imgs.zizaihome.com/8f56b4b3-09aa-4383-be32-03915bfa41fb.png');
+  background-image: url('../static/3-能量條框.png');
 }
 .page-e-bar-1 {
-  background-image: url('http://imgs.zizaihome.com/e3929693-f856-4026-958c-891f95ba5d23.png');
+  background-image: url('../static/3-能量條框1.png');
 }
 .page-e-bar-2 {
-  background-image: url('http://imgs.zizaihome.com/8242c1c6-1edc-4a6e-928b-729d85fc8df0.png');
+  background-image: url('../static/3-能量條框2.png');
 }
 .page-e-bar-3 {
-  background-image: url('http://imgs.zizaihome.com/aa6a734b-16e9-4335-aa0a-0b759788e8ad.png');
+  background-image: url('../static/3-能量條框3.png');
 }
 .page-e-circle {
   position: absolute;
   left: 1.125rem;
-  bottom: 1.2rem;
+  bottom: 1.4rem;
   width: 1.5rem;
   height: 1.5rem;
-  background-image: url('http://imgs.zizaihome.com/67d353c2-163e-4904-98cf-33be7a70c185.png');
+  background-image: url('../static/3-按住获取能量按钮.png');
   background-size: 100% 100%;
 }
 .page-e-btn {
@@ -442,14 +442,14 @@
   transform: translate(-50%);
   width: 2rem;
   height: .87rem;
-  background-image: url('http://imgs.zizaihome.com/bdbf0efa-3d9d-4e86-8758-0f26b1cdbb56.png');
+  background-image: url('../static/3-下一步按钮出现.png');
   background-size: 100% 100%;
 }
 
 
 .page-f {
   z-index: 994;
-  background: url('http://imgs.zizaihome.com/3813ec1a-3382-4ccd-a7ca-00cb36b6f759.jpg');
+  background: url('../static/5-背景.jpg');
   background-size: 100% 100%;
 }
 .page-f-bg {
@@ -496,6 +496,14 @@
 .page-g-bg {
   width: 100%;
   height: 100%;
+}
+
+.play-again {
+  position: absolute;
+  left: 50%;
+  bottom: .5rem;
+  width: 1.43rem;
+  transform: translateX(-50%);
 }
 @media only screen and (max-height: 505px) {
   .page-d-dog-box {
@@ -553,7 +561,52 @@
     bottom: 2.3rem;
   }
 }
-@media (min-width: 370px)  and (min-height: 730px) and (max-height: 795px) {
+@media (min-width: 370px)  and (min-height: 730px) and (max-height: 755px) {
+  .page-a-content {
+    top: 22vh;
+  }
+  .page-d-dog-box {
+    top: 1.1rem;
+    transform: scale(1.3) translate(-36%);
+  }
+  .equip-box {
+    bottom: 2.4rem;
+  }
+  .equip {
+    width: .5rem;
+  }
+  .page-d-btn {
+    bottom: .65rem;
+  }
+  .page-e-dog {
+    top: 29vh
+  }
+}
+@media (min-width: 370px)  and (min-height: 755px) and (max-height: 775px) {
+  .page-a-content {
+    top: 22vh;
+  }
+  .page-d-dog-box {
+    top: 1.1rem;
+    transform: scale(1.3) translate(-36%);
+  }
+  .equip-box {
+    bottom: 2.8rem;
+  }
+  .equip-item {
+    width: 1rem;
+  }
+  .equip {
+    width: .5rem;
+  }
+  .page-d-btn {
+    bottom: .6rem;
+  }
+  .page-e-dog {
+    top: 29vh
+  }
+}
+@media (min-width: 370px)  and (min-height: 775px) and (max-height: 795px) {
   .page-a-content {
     top: 22vh;
   }

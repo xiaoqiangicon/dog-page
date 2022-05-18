@@ -63,17 +63,46 @@ export default {
       step: 1,
 
       isPageFLoaded: false,
+
+      resultImage: '../static/EP265_result.jpg',
+      shareImage: '../static/EP265_share.jpg',
     }
   },
   created() {
     // this.renderId();
+    console.log(window.globalData, 'window.globalData')
+  },
+  mounted() {
+    const { audio } = this.$refs;
+
+    // ios音频无法自动播放，一般情况下，这样就可以自动播放了，但是一些奇葩iPhone机不可以
+    audio.play();
+    let This = this;
+    document.addEventListener(
+      'touchstart',
+      function() {
+        if (This.isPlay) {
+          audio.play();
+          This.isPause = !0;
+        }
+      },
+      false
+    );
+    //微信必须加入Weixin JSAPI的WeixinJSBridgeReady才能生效
+    document.addEventListener(
+      'WeixinJSBridgeReady',
+      function() {
+        audio.play();
+      },
+      false
+    );
   },
   computed: {
     nickName () {
       return (window.globalData && window.globalData.nickName) || '未获取';
     },
     id() {
-      return (window.global && window.globalData.id) || '未获取';
+      return (window.globalData && window.globalData.id) || '未获取';
     }
   },
   watch: {
@@ -267,7 +296,6 @@ export default {
     async clickPageDBtn() {
       if (this.setEquip.length < 2) return;
       let role = generateRole[this.setEquip[0].id - 1][this.setEquip[1].id - 1];
-      console.log(this.setEquip[0].id, this.setEquip[1].id, 'role', role.name);
       await this.pageDfun();
       await this.pageEInit();
     },
@@ -330,7 +358,6 @@ export default {
     async clickPageEBtn() {
       await this.pageEfun();
       this.isPageFLoaded = true;
-      return;
       axios({
         url: fetchUrl,
         method: 'get',
@@ -342,9 +369,10 @@ export default {
         }
       }).then(response => {
         console.log(response, 'response')
+        this.resultImage = response.data.data.resultUrl;
+        this.shareImage = response.data.data.shareUrl;
       })
       .catch(error => {
-        Indicator.close();
         console.log('error' + error);
       });
     },
