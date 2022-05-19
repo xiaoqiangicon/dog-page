@@ -13,10 +13,21 @@
   opacity: 0;
   overflow: hidden;
 }
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 1;
+}
+.page-loading-progress {
+  width: 80%;
+  margin: 0 auto;
+}
 .page-a,
 .page-b,
 .page-c {
-  background: url('../static/1-背景.jpg'); 
+  background: url('http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg'); 
   background-size: 100% 100%;
 }
 .page-a {
@@ -167,7 +178,7 @@
   opacity: 0;
 }
 .page-c-nail-active {
-  animation: nailMove 1.5s ease-in-out infinite;
+  animation: nailMove .8s ease-in-out alternate infinite;
 }
 @-webkit-keyframes nailMove{
   0% { opacity:0; transform: scale(.8); }
@@ -325,7 +336,7 @@
   width: 2.3rem;
   height: 1rem;
   color: #fff;
-  font-size: 16px;
+  font-size: .16rem;
   text-align: left;
   word-break:break-all
 }
@@ -334,7 +345,7 @@
   right: .5rem;
   bottom: .2rem;
   color: #fff;
-  font-size: 14px;
+  font-size: .14rem;
   opacity: 0;
 }
 .equip-box {
@@ -377,14 +388,23 @@
   background-size: 100% 100%;
 }
 .page-d-btn-active {
-  background: url('../static/22-按钮亮起.png');
+  background: url('http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png');
   background-size: 1.75rem .62rem;
+  animation: pageDBtnActive .5s ease-in-out alternate infinite;
+}
+@keyframes pageDBtnActive {
+  0% {
+    transform: translate(-50%) scale(.95);
+  }
+  100% {
+    transform: translate(-50%) scale(1.05);
+  }
 }
 
 
 .page-e {
   z-index: 995;
-  background: url('../static/3-背景.jpg');
+  background: url('http://imgs.zizaihome.com/fbbfdcff-46ef-4279-a1c0-340b5418bfc1.jpg');
   background-size: 100% 100%;
 }
 .page-e-guide-content {
@@ -393,7 +413,7 @@
   bottom: 1.8rem;
   width: 3.75rem;
   height: 1.64rem;
-  font-size: 14px;
+  font-size: .14rem;
   color: #fff;
   background-image: url('../static/2-对话框.png');
   background-size: 100% 100%;
@@ -409,16 +429,16 @@
   background-size: 100% 100%;
 }
 .page-e-dog-0 {
-  background-image: url('../static/3-有点意思的-2.png');
+  background-image: url('http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png');
 }
 .page-e-dog-1 {
-  background-image: url('../static/3-感觉来了的-1.png');
+  background-image: url('http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png');
 }
 .page-e-dog-2 {
-  background-image: url('../static/3-燃起来了的-3.png');
+  background-image: url('http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png');
 }
 .page-e-dog-3 {
-  background-image: url('../static/3-然进云霄了的-4.png');
+  background-image: url('http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png');
 }
 .page-e-bar {
   position: absolute;
@@ -458,6 +478,15 @@
   height: .87rem;
   background-image: url('../static/3-下一步按钮出现.png');
   background-size: 100% 100%;
+  animation: pageEBtnActive .5s ease-in-out alternate infinite;
+}
+@keyframes pageEBtnActive {
+  0% {
+    transform: translate(-50%) scale(.97);
+  }
+  100% {
+    transform: translate(-50%) scale(1.03);
+  }
 }
 
 
@@ -505,7 +534,7 @@
 
 .page-g {
   z-index: 993;
-  background-color: rgba(128, 128, 128, .6);
+  background-color: #002bb5;
 }
 .page-g-bg {
   width: 100%;
@@ -519,6 +548,15 @@
   width: 1.43rem;
   transform: translateX(-50%);
   z-index: 9999;
+  animation: pageGBtnActive .4s ease-in-out alternate infinite;
+}
+@keyframes pageGBtnActive {
+  0% {
+    transform: translate(-50%) scale(.96);
+  }
+  100% {
+    transform: translate(-50%) scale(1.03);
+  }
 }
 
 .page-h {

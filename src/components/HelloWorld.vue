@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <section ref="pageList">
+      <section class="page-loading bg-adaptive" ref="pageLoading" v-if="showLoading">
+      <div class="page-loading-progress">
+        <van-progress :percentage="currentResolve * 9" />
+      </div>
+      </section>
       <section class="page-a bg-adaptive" ref="pageA" @click="pageAClick">
         <div class="page-a-content">
           <div class="page-a-line"></div>
@@ -15,9 +20,9 @@
         </div>
       </section>
       <section class="page-c bg-adaptive" ref="pageC">
-        <img class="page-c-dog" @click="clickDog" src="../static/3-感觉来了的-1.png" ref="pageCDog"/>
+        <img class="page-c-dog" @click="clickDog" src="http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png" ref="pageCDog"/>
         <img class="page-c-nail" @click="clickDog" :class="{'page-c-nail-active': pageCLoaded}" src="http://imgs.zizaihome.com/df77de46-3dee-463e-9732-01de7fca3ccb.png" ref="pageCNail" />
-        <img class="page-c-hole" ref="hole" src="../static/黑洞.png" />
+        <img class="page-c-hole" ref="hole" src="http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png" />
         <img class="page-c-text1" ref="pageCText1" src="../static/1-狗出现后的文字1.png" />
         <img class="page-c-text2" ref="pageCText2" src="../static/1-狗出现的文字2.png"  />
       </section>
@@ -58,7 +63,7 @@
         <van-loading text-color="#f59b36" color="#f59b36" :vertical="true" type="spinner" v-if="isGenerating">结果生成中</van-loading>
       </section>
       <section class="page-f bg-adaptive" ref="pageF">
-        <img class="page-f-bg" src="../static/5-背景浮标.png" />
+        <img class="page-f-bg" src="http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png" />
         <div class="page-f-rocket-box" ref="rocketBox">
           <img class="page-f-rocket" ref="rocket" src="../static/5-火箭.png" />
           <img class="page-f-hot" ref="hot" src="../static/5-火箭动画用-大火.png" />

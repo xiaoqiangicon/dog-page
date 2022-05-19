@@ -10,6 +10,8 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
+      showLoading: true,
+      currentResolve: 0,
       // id: '',
       pageAoutput: ``,
       pageATyper: {
@@ -53,7 +55,7 @@ export default {
       pageETyper: {
         output: '',
         isEnd: false,
-        speed: 10,  // 80最佳
+        speed: 70,  // 80最佳
         singleBack: false,
         sleep: 0,
         type: 'normal',
@@ -66,13 +68,33 @@ export default {
       isPageFLoaded: false,
 
       isGenerating: false,
-      resultImage: '../static/EP265_result.jpg',
-      shareImage: '../static/EP265_share.jpg',
+      resultImage: '',
+      shareImage: '',
     }
   },
   created() {
     // this.renderId();
     console.log(window.globalData, 'window.globalData')
+    let PreloadList = ['http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png', 'http://imgs.zizaihome.com/70003d5d-ddc4-4358-be75-60029c0f7240.png', 'http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg', 'http://imgs.zizaihome.com/fbbfdcff-46ef-4279-a1c0-340b5418bfc1.jpg', 'http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png', 'http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png', 'http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png', 'http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png', 'http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png', 'http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png'];
+
+    let promiseAll = [], imgs = [], total = PreloadList.length;
+    let This = this;
+    for (let i = 0; i < total; i++) {
+      promiseAll[i] = new Promise((resolve, reject) => {
+        imgs[i] = new Image();
+        imgs[i].src = PreloadList[i];
+        imgs[i].onload = function() {
+          console.log('加载完成', This.currentResolve)
+          This.currentResolve++
+          resolve(imgs[i]);
+        };
+      })
+    }
+    Promise.all(promiseAll).then(img => {
+      // 全部图片加载完成
+      this.showLoading = false;
+    })
+    
   },
   mounted() {
     const { audio } = this.$refs;
@@ -98,7 +120,6 @@ export default {
       },
       false
     );
-    this.pageAInit();
   },
   computed: {
     nickName () {
@@ -112,6 +133,11 @@ export default {
     isPageFLoaded(newVal) {
       if (newVal) {
         this.pageFRun();
+      }
+    },
+    showLoading(newVal) {
+      if (!newVal) {
+        this.pageAInit();
       }
     }
   },
@@ -345,12 +371,6 @@ export default {
     async clickPageEBtn() {
       if (this.isGenerating) return;
       this.isGenerating = true;
-      await this.transition(this.$refs.pageA, {
-        time: 3000,
-        style: {
-          zIndex: 99
-        }
-      })
       let response = await axios({
         url: fetchUrl,
         method: 'get',
@@ -441,9 +461,10 @@ export default {
       this.isPageFLoaded = false;
     },
     playAgain() {
-      this.init();
-      this.$refs.pageG.style = 0;
-      this.$refs.pageG.style.zIndex = -1;
+      // this.init();
+      // this.$refs.pageG.style = 0;
+      // this.$refs.pageG.style.zIndex = -1;
+      window.location.reload();
     },
     async getShareImg() {
       this.$refs.pageH.zIndex = 992;

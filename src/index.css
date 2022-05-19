@@ -39,3 +39,7 @@ input {
   height: 100%;
   justify-content: center;
 }
+
+.van-circle__text {
+  color: #fff !important;
+}

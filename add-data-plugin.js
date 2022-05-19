@@ -15,7 +15,7 @@ class RemoveCommentsPlugin {
         if (name.endsWith('.html')) {
           const contents = compilation.assets[name].source();
           let firstScript = contents.indexOf('<script>');
-          const addDataContents = contents.slice(0, firstScript) + '<script>window.globalData={nickName:"${.nickName}",id:"${.id}"}</script><script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script><script>var vConsole = new VConsole();console.log("hello vconsole");</script>' + contents.slice(firstScript);
+          const addDataContents = contents.slice(0, firstScript) + '<script>window.globalData={nickName:"${.nickName}",id:"${.id}"}</script>' + contents.slice(firstScript);
           compilation.assets[name] = {
             source: () => addDataContents,
             size: () => addDataContents.length
@@ -25,5 +25,5 @@ class RemoveCommentsPlugin {
     })
   }
 }
-
+//<script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script><script>var vConsole = new VConsole();console.log("hello vconsole");</script>
 module.exports = RemoveCommentsPlugin;
