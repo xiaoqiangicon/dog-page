@@ -3,7 +3,7 @@
     <section ref="pageList">
       <section class="page-loading bg-adaptive" ref="pageLoading" v-if="showLoading">
       <div class="page-loading-progress">
-        <van-progress :percentage="currentResolve * 9" />
+        <van-progress :percentage="currentResolve * 12" />
       </div>
       </section>
       <section class="page-a bg-adaptive" ref="pageA" @click="pageAClick">
@@ -20,8 +20,10 @@
         </div>
       </section>
       <section class="page-c bg-adaptive" ref="pageC">
+        <div class="page-c-guide" v-if="!hidePageCGuide" @click="hidePageCGuide=true">
+          <img class="page-c-nail" :class="{'page-c-nail-active': pageCLoaded || 1}" src="http://imgs.zizaihome.com/df77de46-3dee-463e-9732-01de7fca3ccb.png" ref="pageCNail" />
+        </div>
         <img class="page-c-dog" @click="clickDog" src="http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png" ref="pageCDog"/>
-        <img class="page-c-nail" @click="clickDog" :class="{'page-c-nail-active': pageCLoaded}" src="http://imgs.zizaihome.com/df77de46-3dee-463e-9732-01de7fca3ccb.png" ref="pageCNail" />
         <img class="page-c-hole" ref="hole" src="http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png" />
         <img class="page-c-text1" ref="pageCText1" src="../static/1-狗出现后的文字1.png" />
         <img class="page-c-text2" ref="pageCText2" src="../static/1-狗出现的文字2.png"  />
@@ -30,15 +32,15 @@
         <div class="page-d-guide" ref="pageDGuide" v-if="!hidePageDGuide">
           <div class="page-d-guide-content" @click="clickPageDGuide">
             <img class="page-d-guide-avatar" src="../static/2-对话框里的头像.png" />
-            <div class="page-d-guide-tips">{{pageDTyper.output}}</div>
-            <div class="page-d-guide-continue" ref="pageDGuideContinue">点击继续</div>
+            <div class="page-d-guide-tips">{{pageDTyper.output}}<br />{{pageD1Typer.output}}<span style="font-weight: 600">{{pageD2Typer.output}}</span>{{pageD3Typer.output}}</div>
+            <div class="page-d-guide-continue" ref="pageDGuideContinue"><点击继续></div>
           </div>
         </div>
         <div class="page-d-dog-box">
           <img class="page-d-dog" src="../static/2-狗子.png" />
           <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
         </div>
-        <p class="page-d-icon-tip" :class="[`page-d-icon-tip-${item.id}`]" v-for="(item) in equip" :key="item.descor" :ref="'pageDIconTip' + item.id">{{ item.tips }}</p>
+        <p class="page-d-icon-tip" :class="[`page-d-icon-tip-${item.id}`]" v-for="(item) in equip" :key="item.descor" :ref="'pageDIconTip' + item.id">{{item.title}}<br />{{ item.tips }}</p>
         <div class="equip-box">
           <div class="equip-item" :class="{'equip-item-gray': item.selected}" @click="addEquip(item)" v-for="(item) in equip" :key="item.icon">
             <img :src="item.icon" class="equip" />
@@ -50,7 +52,7 @@
         <div class="page-e-guide" ref="pageEGuide" v-if="!hidePageEGuide">
           <div class="page-e-guide-content" @click="closePageEGuide">
             <img class="page-d-guide-avatar" src="../static/2-对话框里的头像.png" />
-            <div class="page-d-guide-tips">{{pageETyper.output}}</div>
+            <div class="page-d-guide-tips">{{pageETyper.output}}<span style="font-weight: bold">{{pageE1Typer.output}}</span>{{pageE2Typer.output}}</div>
             <div class="page-d-guide-continue" ref="pageEGuideContinue">点击继续</div>
           </div>
         </div>

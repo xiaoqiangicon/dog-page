@@ -148,7 +148,7 @@
   position: absolute;
   right: .36rem;
   bottom: 3rem;
-  width: .8rem;
+  width: .7rem;
   opacity: 0;
 }
 .page-c-text2 {
@@ -170,6 +170,15 @@
   0% { opacity:0; }
   100% { opacity:1; }
 }
+.page-c-guide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: 10000;
+}
 .page-c-nail {
   position: absolute;
   bottom: 40%;
@@ -186,9 +195,9 @@
 }
 .page-c-hole {
   position: absolute;
-  bottom: .6rem;
-  left: -.28rem;
-  width: 4.25rem;
+  bottom: 1.2rem;
+  left: .75rem;
+  width: 2.25rem;
   z-index: -1;
   opacity: 0;
 }
@@ -252,7 +261,7 @@
   left: .15rem;
 }
 .page-d-icon-8 {
-  top: 0;
+  top: .05rem;
   left: 0;
   width: .5rem;
 }
@@ -281,10 +290,10 @@
 }
 .page-d-icon-tip {
   position: absolute;
-  right: .4rem;
+  right: .2rem;
   top: .6rem;
-  max-width: 1rem;
-  font-size: 12px;
+  max-width: 1.3rem;
+  font-size:  .13rem;
   color: #fff;
   opacity: 0;
 }
@@ -336,7 +345,7 @@
   width: 2.3rem;
   height: 1rem;
   color: #fff;
-  font-size: .16rem;
+  font-size: .15rem;
   text-align: left;
   word-break:break-all
 }
@@ -404,7 +413,7 @@
 
 .page-e {
   z-index: 995;
-  background: url('http://imgs.zizaihome.com/fbbfdcff-46ef-4279-a1c0-340b5418bfc1.jpg');
+  background: url('../static/3bg.jpg');
   background-size: 100% 100%;
 }
 .page-e-guide-content {
@@ -429,16 +438,43 @@
   background-size: 100% 100%;
 }
 .page-e-dog-0 {
-  background-image: url('http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png');
+  background-image: url('http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png');
 }
 .page-e-dog-1 {
-  background-image: url('http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png');
+  background-image: url('http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png');
 }
 .page-e-dog-2 {
   background-image: url('http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png');
 }
+.page-e-dog-2 .page-e-icon-1 {
+  top: -.11rem
+}
+.page-e-dog-2 .page-e-icon-2 {
+  top: -.13rem
+}
 .page-e-dog-3 {
   background-image: url('http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png');
+}
+.page-e-dog-3 .page-e-icon-1 {
+  top: -.11rem
+}
+.page-e-dog-3 .page-e-icon-2 {
+  top: -.11rem;
+}
+.page-e-dog-3 .page-e-icon-3 {
+  top: 0.04rem;
+}
+.page-e-dog-3 .page-e-icon-4 {
+  top: -0.14rem;
+}
+.page-e-dog-3 .page-e-icon-5 {
+  top: -0.21rem;
+}
+.page-e-dog-3 .page-e-icon-8 {
+  top: 0.1rem;
+}
+.page-e-dog-3 .page-e-icon-10 {
+  top: 0rem;
 }
 .page-e-bar {
   position: absolute;

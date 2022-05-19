@@ -5,8 +5,8 @@ import { equip, generateRole } from '../data';
 let typeA = null;
 let typeA1 = null;  // a页面第二行
 let typeA2 = null;  // a页面第三行
-let typeD = null;
-let typeE = null;
+let typeD = null, typeD1=null,typeD2=null,typeD3=null;
+let typeE = null,typeE1=null,typeE2=null;
 let fetchUrl = 'http://miniapp.lencooltech.com/blue_dash/getResult'
 export default {
   name: 'HelloWorld',
@@ -51,12 +51,43 @@ export default {
       pageBLoaded: true,
       pageBTimer: null,
 
+      hidePageCGuide: false,
       pageCLoaded: false,
 
-      hidePageDGuide: false,
+      hidePageDGuide: true,
       pageDLoaded: false,
       pageDoutput: ``,
       pageDTyper: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageD1Typer: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageD2Typer: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageD3Typer: {
         output: '',
         isEnd: false,
         speed: 10,  // 80最佳
@@ -83,6 +114,26 @@ export default {
         backSpeed: 40,
         sentencePause: false
       },
+      pageE1Typer: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 70最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageE2Typer: {
+        output: '',
+        isEnd: false,
+        speed: 10,  // 70最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
       pageETyperClose: false,
       step: 0,
 
@@ -97,7 +148,7 @@ export default {
   created() {
     // this.renderId();
     console.log(window.globalData, 'window.globalData')
-    let PreloadList = ['http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png', 'http://imgs.zizaihome.com/70003d5d-ddc4-4358-be75-60029c0f7240.png', 'http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg', 'http://imgs.zizaihome.com/fbbfdcff-46ef-4279-a1c0-340b5418bfc1.jpg', 'http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png', 'http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png', 'http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png', 'http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png', 'http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png', 'http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png'];
+    let PreloadList = ['http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png', 'http://imgs.zizaihome.com/70003d5d-ddc4-4358-be75-60029c0f7240.png', 'http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg', 'http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png', 'http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png', 'http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png', 'http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png', 'http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png', 'http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png'];
 
     let promiseAll = [], imgs = [], total = PreloadList.length;
     let This = this;
@@ -241,16 +292,19 @@ export default {
       if (!this.pageCLoaded) return;
       this.pageCLoaded = false;
       await this.transition(this.$refs.hole, {
-        time: 300,
+        time: 600,
         style: {
           opacity: 1,
-          rotateZ: '10deg'
+          rotateZ: '0deg',
+          scale: '1.6',
         }
       })
       this.transition(this.$refs.pageCDog, {
         time: 2000,
         style: {
           rotateZ: '760deg',
+          translateY: '-.15rem',
+          bottom: '25%',
           scale: '.2',
           opacity: 0,
         }
@@ -283,7 +337,16 @@ export default {
     },
     initPageDType() {
       this.pageDoutput = `欢迎编号${this.id}正式加⼊100%BEATS计划，请从以下列表中选择两件贴⾝物品，准备登舰。`
-      typeD = new EasyTyper(this.pageDTyper, this.pageDoutput, this.pageDOnloaded)
+      //typeD = new EasyTyper(this.pageDTyper, this.pageDoutput, this.pageDOnloaded)
+      typeD = new EasyTyper(this.pageDTyper,  `欢迎编号${this.id}正式加⼊100%`, () => {
+        typeD1 = new EasyTyper(this.pageD1Typer, 'BEATS计划，', () => {
+          typeD2 = new EasyTyper(this.pageD2Typer, `请从以下列表中选择两件贴⾝物品`, () => {
+            typeD3 = new EasyTyper(this.pageD3Typer, `，准备登舰。`, () => {
+              this.pageDOnloaded();
+            })
+          })
+        })
+      })
     },
     pageDOnloaded() {
       this.hidePageDGuide = false;
@@ -362,7 +425,14 @@ export default {
     initPageEType() {
       typeE = null;
       this.pageEoutput = `100%BEATS号准备发射，现在为您准备了⽓氛助燃剂，务必点击饮下，时刻确保进⼊你的最佳状态！`;
-      typeE = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
+      // typeE = new EasyTyper(this.pageETyper, this.pageEoutput, this.pageEOnloaded)
+      typeE = new EasyTyper(this.pageETyper, '100%BEATS号准备发射，现在为您准备了⽓氛助燃剂，', () => {
+        typeE1 = new EasyTyper(this.pageE1Typer, '务必点击饮下', () => {
+          typeE2 = new EasyTyper(this.pageE2Typer, '，时刻确保进⼊你的最佳状态！', () => {
+            this.pageEOnloaded();
+          })
+        })
+      })
     },
     pageEOnloaded() {
       this.hidePageEGuide = false;
@@ -539,19 +609,19 @@ export default {
         }
       })
       await this.transition(this.$refs.pageCText1, {
-        time: 400,
+        time: 200,
         style: {
           opacity: 1,
         }
       })
       await this.transition(this.$refs.pageCText1, {
-        time: 1200,
+        time: 600,
         style: {
           opacity: 0,
         }
       })
       await this.transition(this.$refs.pageCText2, {
-        time: 900,
+        time: 600,
         style: {
           opacity: 1,
         },
