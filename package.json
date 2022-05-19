@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "easy-typer-js": "^2.1.0",
     "reqwest": "^2.0.5",
+    "vant": "^2.12.47",
     "velocity-animate": "^1.5.2",
     "vue": "^2.6.11"
   },

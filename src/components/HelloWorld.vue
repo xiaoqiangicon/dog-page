@@ -16,6 +16,7 @@
       </section>
       <section class="page-c bg-adaptive" ref="pageC">
         <img class="page-c-dog" @click="clickDog" src="../static/3-感觉来了的-1.png" ref="pageCDog"/>
+        <img class="page-c-nail" @click="clickDog" :class="{'page-c-nail-active': pageCLoaded}" src="http://imgs.zizaihome.com/df77de46-3dee-463e-9732-01de7fca3ccb.png" ref="pageCNail" />
         <img class="page-c-hole" ref="hole" src="../static/黑洞.png" />
         <img class="page-c-text1" ref="pageCText1" src="../static/1-狗出现后的文字1.png" />
         <img class="page-c-text2" ref="pageCText2" src="../static/1-狗出现的文字2.png"  />
@@ -54,6 +55,7 @@
         <div class="page-e-bar" :class="[`page-e-bar-${step}`]"></div>
         <div class="page-e-circle" @click="clickPageECircle" ref="pageECircle"></div>
         <div class="page-e-btn" @click="clickPageEBtn"></div>
+        <van-loading text-color="#f59b36" color="#f59b36" :vertical="true" type="spinner" v-if="isGenerating">结果生成中</van-loading>
       </section>
       <section class="page-f bg-adaptive" ref="pageF">
         <img class="page-f-bg" src="../static/5-背景浮标.png" />
@@ -66,16 +68,15 @@
       <section class="page-g bg-adaptive" ref="pageG">
         <div id="share" class="page-g-share" ref="share">
           <img class="page-g-bg" style="position: absolute;left: 0; top: 0;" :src="resultImage" />
+          <img class="page-g-bg" style="position: absolute;left: 0; top: 0;z-index: 999;opacity: 0;" :src="shareImage" />
+          <img class="play-again" src="http://imgs.zizaihome.com/70003d5d-ddc4-4358-be75-60029c0f7240.png" @click="playAgain" />
         </div>
-        <div class="play-again" src="http://imgs.zizaihome.com/0eeb05c2-d297-476c-9c03-7d1a70581278.png" @click="playAgain" />
-        <button @click="getShareImg" style="position: absolute; z-index: 10000">生成分享图</button>
       </section>
       <section class="page-h bg-adaptive" ref="pageH">
         <div id="share" class="page-g-share" ref="share">
           <img class="page-g-bg" style="position: absolute;left: 0; top: 0;" :src="shareImage" />
         </div>
-        <div class="play-again" src="http://imgs.zizaihome.com/0eeb05c2-d297-476c-9c03-7d1a70581278.png" @click="playAgain" />
-        
+        <div class="play-again" src="http://imgs.zizaihome.com/70003d5d-ddc4-4358-be75-60029c0f7240.png" @click="playAgain" />
       </section>
     </section>
     <audio

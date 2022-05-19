@@ -34,3 +34,8 @@ li {
 input {
   -webkit-user-select: auto;
 }
+
+.van-loading {
+  height: 100%;
+  justify-content: center;
+}

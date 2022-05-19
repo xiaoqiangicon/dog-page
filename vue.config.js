@@ -1,3 +1,5 @@
+const RemoveCommentsPlugin = require('./add-data-plugin');
+
 module.exports = {
 	//=>outputDir
 	//=>自定义目录名称，把生成的JS/CSS/图片等静态资源放置到这个目录中
@@ -6,7 +8,9 @@ module.exports = {
 	productionSourceMap: false,
 	//=>设置一些webpack配置项，用这些配置项和默认的配置项合并
 	configureWebpack: {
-		plugins: []
+		plugins: [
+			new RemoveCommentsPlugin(),
+		]
 	},
 	
 }

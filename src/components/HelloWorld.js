@@ -24,6 +24,7 @@ export default {
       },
       pageALoaded: false,
 
+      isTouchStart: false,
       pageBLoaded: true,
       pageBTimer: null,
 
@@ -60,10 +61,11 @@ export default {
         sentencePause: false
       },
       pageETyperClose: false,
-      step: 1,
+      step: 0,
 
       isPageFLoaded: false,
 
+      isGenerating: false,
       resultImage: '../static/EP265_result.jpg',
       shareImage: '../static/EP265_share.jpg',
     }
@@ -96,6 +98,7 @@ export default {
       },
       false
     );
+    this.pageAInit();
   },
   computed: {
     nickName () {
@@ -112,15 +115,13 @@ export default {
       }
     }
   },
-  mounted() {
-    this.pageAInit();
-    // this.pageDInit();
-  },
   beforeDestroy() {
     typeA = null;
     typeD = null;
     typeE = null;
     this.pageBTimer = null;
+    const { audio } = this.$refs;
+    audio.pause();
   },
   methods: {
     init() {
@@ -146,10 +147,13 @@ export default {
     },
     pageBInit() {
       this.pageBLoaded = false;
+      this.isTouchStart= false;
       this.$refs.pageB.style.opacity = 1;
       this.$refs.pageB.style.zIndex = 998;
     },
     async clickNailCheck() {
+      if (this.isTouchStart) return;
+      this.isTouchStart = true;
       await this.transition(this.$refs.nailLine, {
         time: 1500,
         style: {
@@ -163,25 +167,6 @@ export default {
         }
       })
       await this.pageBfun();
-      await this.transition(this.$refs.pageCText1, {
-        time: 400,
-        style: {
-          opacity: 1,
-        }
-      })
-      await this.transition(this.$refs.pageCText1, {
-        time: 1200,
-        style: {
-          opacity: 0,
-        }
-      })
-      await this.transition(this.$refs.pageCText2, {
-        time: 900,
-        style: {
-          opacity: 1,
-        }
-      })
-      this.pageCLoaded = true;
     },
     pageCInit() {
       this.$refs.pageC.style.opacity = 1;
@@ -189,6 +174,7 @@ export default {
     },
     async clickDog() {
       if (!this.pageCLoaded) return;
+      this.pageCLoaded = false;
       await this.transition(this.$refs.hole, {
         time: 300,
         style: {
@@ -292,6 +278,7 @@ export default {
       equip.selected = true;
       this.setEquip.push(equip);
       equip.selected = true;
+      console.log(this.setEquip, 'equip')
     },
     async clickPageDBtn() {
       if (this.setEquip.length < 2) return;
@@ -305,7 +292,7 @@ export default {
       this.$refs.pageE.style.zIndex = 995;
       this.hidePageEGuide = false;
       this.pageETyperClose = false;
-      this.step = 1;
+      this.step = 0;
     },
     initPageEType() {
       typeE = null;
@@ -356,9 +343,15 @@ export default {
       })
     },
     async clickPageEBtn() {
-      await this.pageEfun();
-      this.isPageFLoaded = true;
-      axios({
+      if (this.isGenerating) return;
+      this.isGenerating = true;
+      await this.transition(this.$refs.pageA, {
+        time: 3000,
+        style: {
+          zIndex: 99
+        }
+      })
+      let response = await axios({
         url: fetchUrl,
         method: 'get',
         params: {
@@ -367,14 +360,20 @@ export default {
           item2: this.setEquip[1].id - 1,
           dogState: this.step
         }
-      }).then(response => {
-        console.log(response, 'response')
-        this.resultImage = response.data.data.resultUrl;
-        this.shareImage = response.data.data.shareUrl;
       })
-      .catch(error => {
-        console.log('error' + error);
-      });
+
+      if (response.data) {
+        this.isGenerating = false;
+        this.resultImage = response.data.data.resultUrl;
+        this.shareImage = response.data.data.shareURl;
+        
+        await this.pageEfun();
+        this.isPageFLoaded = true;
+      } else {
+        this.isGenerating = false;
+        console.log('error');
+      };
+      
     },
     initPageFInit() {
       this.$refs.pageF.style.opacity = 1;
@@ -443,9 +442,10 @@ export default {
     },
     playAgain() {
       this.init();
+      this.$refs.pageG.style = 0;
+      this.$refs.pageG.style.zIndex = -1;
     },
     async getShareImg() {
-      console.log(123)
       this.$refs.pageH.zIndex = 992;
       this.$refs.pageH.opacity = 1;
       await this.transition(this.$refs.pageG, {
@@ -472,12 +472,33 @@ export default {
       this.pageATyper.output = '';
     },
     async pageBfun() {
-      this.pageCInit();
+      await this.pageCInit();
       await this.transition(this.$refs.pageB, {
         time: 500,
         style: {
           opacity: 0,
           zIndex: -1
+        }
+      })
+      await this.transition(this.$refs.pageCText1, {
+        time: 400,
+        style: {
+          opacity: 1,
+        }
+      })
+      await this.transition(this.$refs.pageCText1, {
+        time: 1200,
+        style: {
+          opacity: 0,
+        }
+      })
+      await this.transition(this.$refs.pageCText2, {
+        time: 900,
+        style: {
+          opacity: 1,
+        },
+        complete: () => {
+          this.pageCLoaded = true;
         }
       })
       this.transition(this.$refs.nailLine, {
