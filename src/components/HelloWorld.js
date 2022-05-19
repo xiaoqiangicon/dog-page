@@ -3,6 +3,8 @@ import EasyTyper from 'easy-typer-js';
 import { equip, generateRole } from '../data';
 
 let typeA = null;
+let typeA1 = null;  // a页面第二行
+let typeA2 = null;  // a页面第三行
 let typeD = null;
 let typeE = null;
 let fetchUrl = 'http://miniapp.lencooltech.com/blue_dash/getResult'
@@ -13,8 +15,27 @@ export default {
       showLoading: true,
       currentResolve: 0,
       // id: '',
-      pageAoutput: ``,
       pageATyper: {
+        output: '',
+        isEnd: false,
+        speed: 70,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageA1Typer: {
+        output: '',
+        isEnd: false,
+        speed: 70,  // 80最佳
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+      pageA2Typer: {
         output: '',
         isEnd: false,
         speed: 70,  // 80最佳
@@ -38,7 +59,7 @@ export default {
       pageDTyper: {
         output: '',
         isEnd: false,
-        speed: 70,  // 80最佳
+        speed: 10,  // 80最佳
         singleBack: false,
         sleep: 0,
         type: 'normal',
@@ -55,7 +76,7 @@ export default {
       pageETyper: {
         output: '',
         isEnd: false,
-        speed: 70,  // 80最佳
+        speed: 10,  // 70最佳
         singleBack: false,
         sleep: 0,
         type: 'normal',
@@ -66,6 +87,7 @@ export default {
       step: 0,
 
       isPageFLoaded: false,
+      pageFRunFinish: false,
 
       isGenerating: false,
       resultImage: '',
@@ -127,6 +149,9 @@ export default {
     },
     id() {
       return (window.globalData && window.globalData.id) || '未获取';
+    },
+    isShowResult() {
+      return this.resultImage && this.pageFRunFinish;
     }
   },
   watch: {
@@ -139,10 +164,17 @@ export default {
       if (!newVal) {
         this.pageAInit();
       }
+    },
+    isShowResult(newVal) {
+      if (newVal) {
+        this.pageFfun();
+      }
     }
   },
   beforeDestroy() {
     typeA = null;
+    typeA1 = null;
+    typeA2 = null;
     typeD = null;
     typeE = null;
     this.pageBTimer = null;
@@ -161,8 +193,15 @@ export default {
     },
     initPageAType() {
       typeA = null;
-      this.pageAoutput = `Hi!?你已成功被选为本次100%BEATS号移⺠计划的⼀员，你的ID是：${this.id}`;
-      typeA = new EasyTyper(this.pageATyper, this.pageAoutput, this.pageAOnloaded)
+      typeA1 = null;
+      typeA2 = null;
+      typeA = new EasyTyper(this.pageATyper, 'Hi!?你已成功被选为本次', () => {
+        typeA1 = new EasyTyper(this.pageA1Typer, '100%BEATS号移⺠计划的', () => {
+          typeA2 = new EasyTyper(this.pageA2Typer, `⼀员，你的ID是：${this.id}`, () => {
+            this.pageAOnloaded()
+          })
+        })
+      })
     },
     pageAOnloaded() {
       this.pageALoaded = true;
@@ -371,7 +410,7 @@ export default {
     async clickPageEBtn() {
       if (this.isGenerating) return;
       this.isGenerating = true;
-      let response = await axios({
+      axios({
         url: fetchUrl,
         method: 'get',
         params: {
@@ -380,20 +419,19 @@ export default {
           item2: this.setEquip[1].id - 1,
           dogState: this.step
         }
-      })
-
-      if (response.data) {
+      }).then(response => {
         this.isGenerating = false;
+        console.log(response, 'response')
         this.resultImage = response.data.data.resultUrl;
         this.shareImage = response.data.data.shareURl;
-        
-        await this.pageEfun();
-        this.isPageFLoaded = true;
-      } else {
+      }).catch(e => {
+        this.resultImage = 'ww.baidu.com'
         this.isGenerating = false;
         console.log('error');
-      };
-      
+      })
+
+      await this.pageEfun();
+      this.isPageFLoaded = true;
     },
     initPageFInit() {
       this.$refs.pageF.style.opacity = 1;
@@ -455,10 +493,9 @@ export default {
           easing: 'sinOut',
         }
       })
-      await this.pageFfun();
-
-      // 复原火箭初始状态
-      this.isPageFLoaded = false;
+      // await this.pageFfun();
+      // 火箭运动结束了
+      this.pageFRunFinish = true;
     },
     playAgain() {
       // this.init();
@@ -639,7 +676,8 @@ export default {
           opacity: 0
         }
       })
-      console.log('why')
+      
+      this.isPageFLoaded = false;
     },
     transition (el, options) {
       return new Promise((resolve, reject) => {

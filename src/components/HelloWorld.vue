@@ -9,7 +9,7 @@
       <section class="page-a bg-adaptive" ref="pageA" @click="pageAClick">
         <div class="page-a-content">
           <div class="page-a-line"></div>
-          <p class="page-a-text">{{pageATyper.output}}</p>
+          <p class="page-a-text"><span style="display: inline-block; margin-bottom: 6px;">{{pageATyper.output}}</span><br /><span style="display: inline-block; margin-bottom: 6px;">{{pageA1Typer.output}}</span><br />{{pageA2Typer.output}}</p>
         </div>
       </section>
       <section class="page-b bg-adaptive" ref="pageB">
@@ -55,12 +55,11 @@
           </div>
         </div>
         <div class="page-e-dog" :class="[`page-e-dog-${step}`]">
-          <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
+          <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '', `page-e-icon-${item.id}`]"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
         </div>
         <div class="page-e-bar" :class="[`page-e-bar-${step}`]"></div>
         <div class="page-e-circle" @click="clickPageECircle" ref="pageECircle"></div>
         <div class="page-e-btn" @click="clickPageEBtn"></div>
-        <van-loading text-color="#f59b36" color="#f59b36" :vertical="true" type="spinner" v-if="isGenerating">结果生成中</van-loading>
       </section>
       <section class="page-f bg-adaptive" ref="pageF">
         <img class="page-f-bg" src="http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png" />
@@ -69,6 +68,7 @@
           <img class="page-f-hot" ref="hot" src="../static/5-火箭动画用-大火.png" />
         </div>
         <img class="page-f-fire" ref="fire" src="../static/5-火箭动画用火苗.png" />
+        <van-loading text-color="#fff" color="#fff" :vertical="true" type="spinner" v-if="!resultImage && pageFRunFinish">结果生成中</van-loading>
       </section>
       <section class="page-g bg-adaptive" ref="pageG">
         <div id="share" class="page-g-share" ref="share">

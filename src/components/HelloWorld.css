@@ -32,7 +32,6 @@
 }
 .page-a {
   z-index: 999;
-  font-size: .2rem;
   color: #fff;
   text-align: left;
 }
@@ -40,7 +39,6 @@
   position: absolute;
   top: .8rem;
   left: .34rem;
-  max-width: 2.8rem;
 }
 .page-a-line {
   width: .5rem;
@@ -49,6 +47,8 @@
 }
 .page-a-text {
   margin-top: .1rem;
+  font-size: 20px;
+  line-height: 26px;
 }
 
 
@@ -187,8 +187,8 @@
 .page-c-hole {
   position: absolute;
   bottom: .6rem;
-  left: .375rem;
-  width: 3rem;
+  left: -.28rem;
+  width: 4.25rem;
   z-index: -1;
   opacity: 0;
 }
@@ -459,6 +459,9 @@
 }
 .page-e-bar-3 {
   background-image: url('../static/3-能量條框3.png');
+}
+.page-e-icon-12 {
+  top: .43rem;
 }
 .page-e-circle {
   position: absolute;
