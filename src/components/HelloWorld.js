@@ -148,9 +148,9 @@ export default {
   },
   mounted() {
     // this.renderId();
-    let { hole, dog1 } = this.$refs;
+    let { hole, pageCDog, rocket, hot } = this.$refs;
     console.log(window.globalData, 'window.globalData')
-    let PreloadList = [hole.src, 'http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg', dog1.src, 'http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png', 'http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png', 'http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png', 'http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png'];
+    let PreloadList = [hole.src, pageCDog.src, rocket.src, hot.src];
 
     let promiseAll = [], imgs = [], total = PreloadList.length;
     let This = this;
@@ -276,15 +276,14 @@ export default {
         time: 600,
         style: {
           opacity: 1,
-          rotateZ: '0deg',
           scale: '1.6',
         }
       })
       this.transition(this.$refs.pageCDog, {
         time: 2000,
         style: {
-          rotateZ: '760deg',
-          bottom: '23%',
+          rotateZ: '900deg',
+          bottom: '1.35rem',
           scale: '.2',
           opacity: 0,
         }

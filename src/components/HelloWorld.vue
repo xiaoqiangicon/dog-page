@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="page-d-dog-box">
-          <img class="page-d-dog" ref="dog1" src="../static/3-感觉来了的-1.png" />
+          <img class="page-d-dog" src="../static/3-感觉来了的-1.png" />
           <img class="page-d-icon" :class="[`page-d-icon-${item.id}`, item.selected ? 'page-d-icon-active' : '']"  :src="item.decor" v-for="(item) in equip" :key="item.id" />
         </div>
         <p class="page-d-icon-tip" :class="[`page-d-icon-tip-${item.id}`]" v-for="(item) in equip" :key="item.descor" :ref="'pageDIconTip' + item.id">{{item.title}}<br />{{ item.tips }}</p>
@@ -56,7 +56,7 @@
           <div class="page-e-guide-content" @click="closePageEGuide">
             <img class="page-d-guide-avatar" src="../static/2-对话框里的头像.png" />
             <div class="page-d-guide-tips">{{pageETyper.output}}<span style="font-weight: bold">{{pageE1Typer.output}}</span>{{pageE2Typer.output}}</div>
-            <div class="page-d-guide-continue" ref="pageEGuideContinue">点击继续</div>
+            <div class="page-d-guide-continue" ref="pageEGuideContinue"><点击继续></div>
           </div>
         </div>
         <div class="page-e-dog" :class="[`page-e-dog-${step}`]">

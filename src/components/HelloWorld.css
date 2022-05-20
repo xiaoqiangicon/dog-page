@@ -27,7 +27,7 @@
 .page-a,
 .page-b,
 .page-c {
-  background: url('http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg'); 
+  background: url('../static/1-背景.jpg'); 
   background-size: 100% 100%;
 }
 .page-a {
@@ -293,7 +293,7 @@
   right: .2rem;
   top: .6rem;
   max-width: 1.3rem;
-  font-size:  .13rem;
+  font-size:  .12rem;
   color: #fff;
   opacity: 0;
 }
@@ -444,10 +444,10 @@
   background-image: url('../static/3-感觉来了的-1.png');
 }
 .page-e-dog-1 {
-  background-image: url('http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png');
+  background-image: url('../static/3-有点意思的-2.png');
 }
 .page-e-dog-2 {
-  background-image: url('http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png');
+  background-image: url('../static/3-燃起来了的-3.png');
 }
 .page-e-dog-2 .page-e-icon-1 {
   top: -.11rem
@@ -456,7 +456,7 @@
   top: -.13rem
 }
 .page-e-dog-3 {
-  background-image: url('http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png');
+  background-image: url('../static/3-然进云霄了的-4.png');
 }
 .page-e-dog-3 .page-e-icon-1 {
   top: -.11rem
