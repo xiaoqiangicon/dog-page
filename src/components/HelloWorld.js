@@ -51,7 +51,7 @@ export default {
       pageBLoaded: true,
       pageBTimer: null,
 
-      hidePageCGuide: false,
+      hidePageCGuide: true,
       pageCLoaded: false,
 
       hidePageDGuide: true,
@@ -135,6 +135,7 @@ export default {
         sentencePause: false
       },
       pageETyperClose: false,
+      hidePageEMask: true,
       step: 0,
 
       isPageFLoaded: false,
@@ -145,10 +146,11 @@ export default {
       shareImage: '',
     }
   },
-  created() {
+  mounted() {
     // this.renderId();
+    let { hole, dog1 } = this.$refs;
     console.log(window.globalData, 'window.globalData')
-    let PreloadList = ['http://imgs.zizaihome.com/72863c5f-4ed4-4390-962f-252c5e6bc87b.png', 'http://imgs.zizaihome.com/70003d5d-ddc4-4358-be75-60029c0f7240.png', 'http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg', 'http://imgs.zizaihome.com/06792aa5-89f9-42ce-8f17-b67eec4eb36b.png', 'http://imgs.zizaihome.com/5f2844c2-8f6f-4c6b-b711-643175c614bb.png', 'http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png', 'http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png', 'http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png', 'http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png'];
+    let PreloadList = [hole.src, 'http://imgs.zizaihome.com/5a23a0f4-fd2c-4885-a638-e95941c9ec60.jpg', dog1.src, 'http://imgs.zizaihome.com/da00d024-454b-44b7-aafc-bdf758427f9f.png', 'http://imgs.zizaihome.com/a8a4599c-f5ca-4e89-a1bf-82eaea8c5ceb.png', 'http://imgs.zizaihome.com/79c2fc26-3c09-4836-82c3-b8089f19f668.png', 'http://imgs.zizaihome.com/923049db-c320-47dd-8c53-bbe7fbd0071b.png'];
 
     let promiseAll = [], imgs = [], total = PreloadList.length;
     let This = this;
@@ -168,31 +170,6 @@ export default {
       this.showLoading = false;
     })
     
-  },
-  mounted() {
-    const { audio } = this.$refs;
-
-    // ios音频无法自动播放，一般情况下，这样就可以自动播放了，但是一些奇葩iPhone机不可以
-    audio.play();
-    let This = this;
-    document.addEventListener(
-      'touchstart',
-      function() {
-        if (This.isPlay) {
-          audio.play();
-          This.isPause = !0;
-        }
-      },
-      false
-    );
-    //微信必须加入Weixin JSAPI的WeixinJSBridgeReady才能生效
-    document.addEventListener(
-      'WeixinJSBridgeReady',
-      function() {
-        audio.play();
-      },
-      false
-    );
   },
   computed: {
     nickName () {
@@ -289,8 +266,12 @@ export default {
       this.$refs.pageC.style.zIndex = 997;
     },
     async clickDog() {
+      this.hidePageCGuide = true;
       if (!this.pageCLoaded) return;
+      let { holeAudio } = this.$refs;
       this.pageCLoaded = false;
+      holeAudio.muted = false;
+      holeAudio.play();
       await this.transition(this.$refs.hole, {
         time: 600,
         style: {
@@ -303,8 +284,7 @@ export default {
         time: 2000,
         style: {
           rotateZ: '760deg',
-          translateY: '-.15rem',
-          bottom: '25%',
+          bottom: '23%',
           scale: '.2',
           opacity: 0,
         }
@@ -322,6 +302,7 @@ export default {
           opacity: 0,
         }
       })
+      holeAudio.pause();
       await this.pageCfun();
       await this.pageDInit();
     },
@@ -370,6 +351,7 @@ export default {
     },
     async addEquip(equip) {
       let equipAudio = this.$refs.equipAudio;
+      equipAudio.muted = false;
       equipAudio.pause();
       equipAudio.currentTime = 0;
       equipAudio.play();
@@ -434,10 +416,10 @@ export default {
         })
       })
     },
-    pageEOnloaded() {
+    async pageEOnloaded() {
       this.hidePageEGuide = false;
       this.pageETyperClose = true;
-      this.transition(this.$refs.pageEGuideContinue, {
+      await this.transition(this.$refs.pageEGuideContinue, {
         time: 400,
         style: {
           opacity: 1,
@@ -446,21 +428,24 @@ export default {
     },
     async closePageEGuide() {
       if (!this.pageETyperClose) return;
-      await this.transition(this.$refs.pageEGuide, {
-        time: 400,
-        style: {
-          opacity: 0,
-        }
-      })
+      // await this.transition(this.$refs.pageEGuide, {
+      //   time: 400,
+      //   style: {
+      //     opacity: 0,
+      //   }
+      // })
       this.hidePageEGuide = true;
+      this.hidePageEMask = false;
     },
     async clickPageECircle() {
+      this.hidePageEMask = true;
       if (this.step < 3) {
         this.step++;
       } else {
         this.step = 0;
       }
       let btnAudio = this.$refs.btnAudio;
+      btnAudio.muted = false;
       btnAudio.pause();
       btnAudio.currentTime = 0;
       btnAudio.play();
@@ -508,6 +493,9 @@ export default {
       this.$refs.pageF.style.zIndex = 994;
     },
     async pageFRun() {
+      let { rocketAudio } = this.$refs;
+      rocketAudio.muted = false;
+      rocketAudio.play();
       await this.transition(this.$refs.hot, {
         time: 300,
         style: {
@@ -535,7 +523,7 @@ export default {
           height: '1.3rem'
         }
       })
-      
+
       await this.transition(this.$refs.fire, {
         time: 100,
         style: {
@@ -563,6 +551,7 @@ export default {
           easing: 'sinOut',
         }
       })
+      rocketAudio.pause();
       // await this.pageFfun();
       // 火箭运动结束了
       this.pageFRunFinish = true;
@@ -629,6 +618,7 @@ export default {
           this.pageCLoaded = true;
         }
       })
+      this.hidePageCGuide = false;
       this.transition(this.$refs.nailLine, {
         time: 10,
         style: {
@@ -710,6 +700,10 @@ export default {
       this.pageETyper.output = '';
     },
     async pageFfun() {
+      let { resultAudio } = this.$refs;
+      resultAudio.muted = false;
+      resultAudio.currentTime = 0;
+      resultAudio.play();
       this.initPageGInit();
       await this.transition(this.$refs.pageF, {
         time: 500,
