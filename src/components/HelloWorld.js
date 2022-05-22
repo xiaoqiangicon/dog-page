@@ -7,7 +7,7 @@ let typeA1 = null;  // a页面第二行
 let typeA2 = null;  // a页面第三行
 let typeD = null, typeD1=null,typeD2=null,typeD3=null;
 let typeE = null,typeE1=null,typeE2=null;
-let fetchUrl = 'http://miniapp.lencooltech.com/blue_dash/getResult'
+let fetchUrl = '/blue_dash/getResult'
 export default {
   name: 'HelloWorld',
   data() {
@@ -150,7 +150,7 @@ export default {
     // this.renderId();
     let { hole, pageCDog, rocket, hot } = this.$refs;
     console.log(window.globalData, 'window.globalData')
-    let PreloadList = [hole.src, pageCDog.src, rocket.src, hot.src];
+    let PreloadList = ['https://cdn.lencooltech.com/blue_dash/dog1.png', 'https://cdn.lencooltech.com/blue_dash/bg1.jpg', 'https://cdn.lencooltech.com/blue_dash/dog2.png', 'https://cdn.lencooltech.com/blue_dash/dog3.png', 'https://cdn.lencooltech.com/blue_dash/dog4.png', 'https://cdn.lencooltech.com/blue_dash/bg2.jpg',  'https://cdn.lencooltech.com/blue_dash/bg3.jpg',  'https://cdn.lencooltech.com/blue_dash/bg4.png',  'https://cdn.lencooltech.com/blue_dash/bg5.jpg'];
 
     let promiseAll = [], imgs = [], total = PreloadList.length;
     let This = this;
@@ -468,6 +468,7 @@ export default {
         url: fetchUrl,
         method: 'get',
         params: {
+          nickName: this.nickName,
           id: this.id,
           item1: this.setEquip[0].id - 1,
           item2: this.setEquip[1].id - 1,

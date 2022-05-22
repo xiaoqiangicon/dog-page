@@ -3,7 +3,7 @@
     <HelloWorld ref="pages"/>
     <audio
       ref="audio"
-      src="./static/bg.wav"
+      src="https://cdn.xiugou.club/blue_dash/bg.wav"
       preload
       autoplay
       loop

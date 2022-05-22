@@ -27,7 +27,7 @@
 .page-a,
 .page-b,
 .page-c {
-  background: url('../static/1-背景.jpg'); 
+  background: url('https://cdn.lencooltech.com/blue_dash/bg1.jpg'); 
   background-size: 100% 100%;
 }
 .page-a {
@@ -63,7 +63,7 @@
   width: 1.9rem;
   height: 2.9rem;
   overflow: hidden;
-  background-image: url('../static/1-指纹.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/finger.png');
   background-size: 1.9rem 2.9rem;
 }
 .nail-line-box {
@@ -80,7 +80,7 @@
   left: 0;
   width: 1.9rem;
   height: 2.46rem;
-  background: url('../static/图.png') center center;
+  background: url('https://cdn.lencooltech.com/blue_dash/finger_light.png') center center;
   background-size: 100% 2.46rem;
 }
 .nail-line-active {
@@ -204,7 +204,7 @@
 
 
 .page-d {
-  background-image: url('../static/2-背景.jpg');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/bg2.jpg');
   background-size: 100% 100%;
   z-index: 996;
 }
@@ -315,7 +315,7 @@
   left: 0;
   width: 100%;
   height: 1.5rem;
-  background-image: url('../static/2-对话框.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/dialog.png');
   background-size: 100% 100%;
 }
 .page-d-guide-avatar {
@@ -360,7 +360,7 @@
   width: .67rem;
   height: .6rem;
   margin-bottom: .14rem;
-  background: url('../static/2-道具框.png');
+  background: url('https://cdn.lencooltech.com/blue_dash/bg_black.jpg');
   background-size: 100% 100%;
 }
 .equip-item:nth-of-type(3n) {
@@ -379,11 +379,11 @@
   transform: translate(-50%);
   width: 1.75rem;
   height: .62rem;
-  background: url('../static/2-按钮未启动.png');
+  background: url('https://cdn.lencooltech.com/blue_dash/btn1_1.png');
   background-size: 100% 100%;
 }
 .page-d-btn-active {
-  background: url('../static/按钮亮起.png');
+  background: url('https://cdn.lencooltech.com/blue_dash/btn1_2.png');
   background-size: 1.75rem .62rem;
   animation: pageDBtnActive .5s ease-in-out alternate infinite;
 }
@@ -399,7 +399,7 @@
 
 .page-e {
   z-index: 995;
-  background: url('../static/3bg.jpg');
+  background: url('https://cdn.lencooltech.com/blue_dash/bg3.jpg');
   background-size: 100% 100%;
 }
 .page-e-mask {
@@ -427,7 +427,7 @@
   height: 1.64rem;
   font-size: .14rem;
   color: #fff;
-  background-image: url('../static/2-对话框.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/dialog.png');
   background-size: 100% 100%;
   word-break:break-all
 }
@@ -441,13 +441,13 @@
   background-size: 100% 100%;
 }
 .page-e-dog-0 {
-  background-image: url('../static/3-感觉来了的-1.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/dog1.png');
 }
 .page-e-dog-1 {
-  background-image: url('../static/3-有点意思的-2.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/dog2.png');
 }
 .page-e-dog-2 {
-  background-image: url('../static/3-燃起来了的-3.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/dog3.png');
 }
 .page-e-dog-2 .page-e-icon-1 {
   top: -.11rem
@@ -456,7 +456,7 @@
   top: -.13rem
 }
 .page-e-dog-3 {
-  background-image: url('../static/3-然进云霄了的-4.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/dog4.png');
 }
 .page-e-dog-3 .page-e-icon-1 {
   top: -.11rem
@@ -488,19 +488,25 @@
   background-size: 100% 100%;
 }
 .page-e-bar-0 {
-  background-image: url('../static/3-能量條框.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/power1.png');
 }
 .page-e-bar-1 {
-  background-image: url('../static/3-能量條框1.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/power2.png');
 }
 .page-e-bar-2 {
-  background-image: url('../static/3-能量條框2.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/power3.png');
 }
 .page-e-bar-3 {
-  background-image: url('../static/3-能量條框3.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/power4.png');
 }
 .page-e-icon-12 {
   top: .43rem;
+}
+.page-e-dog-2 .page-e-icon-12 {
+  top:  .44rem;
+}
+.page-e-dog-3 .page-e-icon-12 {
+  top:  .46rem;
 }
 .page-e-circle {
   position: absolute;
@@ -508,33 +514,33 @@
   bottom: 1.4rem;
   width: 1.5rem;
   height: 1.5rem;
-  background-image: url('../static/3-按住获取能量按钮.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/btn_drink.png');
   background-size: 100% 100%;
 }
 .page-e-btn {
   position: absolute;
   left: 50%;
   bottom: .3rem;
-  transform: translate(-50%);
+  transform: translateX(-50%);
   width: 2rem;
   height: .87rem;
-  background-image: url('../static/3-下一步按钮出现.png');
+  background-image: url('https://cdn.lencooltech.com/blue_dash/btn_next.png');
   background-size: 100% 100%;
   animation: pageEBtnActive .5s ease-in-out alternate infinite;
 }
 @keyframes pageEBtnActive {
   0% {
-    transform: translate(-50%) scale(.97);
+    transform: translateX(-50%) scale(.97);
   }
   100% {
-    transform: translate(-50%) scale(1.03);
+    transform: translateX(-50%) scale(1.03);
   }
 }
 
 
 .page-f {
   z-index: 994;
-  background: url('../static/5-背景.jpg');
+  background: url('https://cdn.lencooltech.com/blue_dash/bg5.jpg');
   background-size: 100% 100%;
 }
 .page-f-bg {
